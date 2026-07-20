@@ -1,0 +1,4 @@
+# V4 runtime and contract-validation dependencies. Installation is separately gated.
+jsonschema==4.26.0
+PyYAML==6.0.3
+tiktoken==0.13.0

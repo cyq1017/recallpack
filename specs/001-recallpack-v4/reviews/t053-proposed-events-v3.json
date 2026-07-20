@@ -1,0 +1,177 @@
+{
+  "record_type": "proposed_model_visible_events_v3",
+  "semantic_rules_version": "4.1",
+  "scenario_authoring_epoch": "2026-07-18T00:00:00Z",
+  "scenarios": [
+    {
+      "scenario_slot": "projectodyssey",
+      "events": [
+        {
+          "event_sha256": "fbc2fd442199b8515224f1f400aebbe9e4442ad0843ef8db9b466f9be9c99379",
+          "event": {
+            "source_ref": "projectodyssey:turn-001",
+            "observed_at": "2026-03-07T22:39:38Z",
+            "actor": "user",
+            "kind": "message",
+            "summary": "A Mojo JIT crash before test output is treated as a compiler flake, and CI reruns the affected test execution.",
+            "model_visible": true,
+            "authored_summary": true
+          },
+          "source_id": "projectodyssey-old-policy",
+          "derivation_basis": "The source classifies a Mojo JIT crash before test output as a compiler flake and describes rerunning the affected test execution.",
+          "metadata_derivation": {
+            "source_ref": "scenario namespace plus source-ledger order",
+            "observed_at": "public commit author timestamp",
+            "actor_and_kind": "closed modelVisibleEvent41 envelope",
+            "order": "source-backed events sorted by independently verified commit author timestamp"
+          }
+        },
+        {
+          "event_sha256": "8125f81bd3943fb3fe58164cb4df1d8bf2a015cf0e7a826e6781b4a4003d5067",
+          "event": {
+            "source_ref": "projectodyssey:turn-002",
+            "observed_at": "2026-07-13T05:15:42Z",
+            "actor": "user",
+            "kind": "message",
+            "summary": "A Mojo JIT execution crash is treated as a bug that requires a minimal reproducer and a fix to the underlying issue.",
+            "model_visible": true,
+            "authored_summary": true
+          },
+          "source_id": "projectodyssey-new-policy",
+          "derivation_basis": "The source classifies Mojo JIT execution crashes as bugs and requires a minimal reproducer plus a fix to the underlying issue.",
+          "metadata_derivation": {
+            "source_ref": "scenario namespace plus source-ledger order",
+            "observed_at": "public commit author timestamp",
+            "actor_and_kind": "closed modelVisibleEvent41 envelope",
+            "order": "source-backed events sorted by independently verified commit author timestamp"
+          }
+        },
+        {
+          "event_sha256": "6f461a3b065ce7c123b74100d72dfe533c6c8c387ae6dc3aa5166826338fb5a6",
+          "event": {
+            "source_ref": "projectodyssey:turn-003",
+            "observed_at": "2026-07-18T00:00:00Z",
+            "actor": "user",
+            "kind": "message",
+            "summary": "CI policy changes must use the dependencies already present in the project.",
+            "model_visible": true,
+            "authored_summary": true
+          },
+          "source_id": null,
+          "derivation_basis": "Neutral authored evaluation constraint fixed independently of any relation label, required-memory answer, hidden test, or expected patch.",
+          "metadata_derivation": {
+            "source_ref": "scenario namespace plus neutral setup order",
+            "observed_at": "frozen scenario authoring epoch",
+            "actor_and_kind": "closed modelVisibleEvent41 envelope",
+            "order": "neutral constraint follows source history and is not used as a lifecycle endpoint"
+          }
+        },
+        {
+          "event_sha256": "af694af955481570e3d82d6dff6549657746927235c75fb447ed62159412c6eb",
+          "event": {
+            "source_ref": "projectodyssey:turn-004",
+            "observed_at": "2026-07-18T00:00:01Z",
+            "actor": "user",
+            "kind": "message",
+            "summary": "Handoff task: update Mojo JIT crash handling without changing project dependencies.",
+            "model_visible": true,
+            "authored_summary": true
+          },
+          "source_id": null,
+          "derivation_basis": "Neutral authored handoff task fixed independently of any relation label, required-memory answer, hidden test, or expected patch.",
+          "metadata_derivation": {
+            "source_ref": "scenario namespace plus neutral setup order",
+            "observed_at": "frozen scenario authoring epoch plus one second",
+            "actor_and_kind": "closed modelVisibleEvent41 envelope",
+            "order": "handoff task is last and is not used as a lifecycle endpoint"
+          }
+        }
+      ]
+    },
+    {
+      "scenario_slot": "deepagents",
+      "events": [
+        {
+          "event_sha256": "f9c2c2e8e97741b16aeac91bab1b5eaad886e64860e58d5bcf06ed0965f9e9b0",
+          "event": {
+            "source_ref": "deepagents:turn-001",
+            "observed_at": "2026-05-16T00:18:34Z",
+            "actor": "user",
+            "kind": "message",
+            "summary": "The libs/cli package contains the interactive Textual application and slash-command registry.",
+            "model_visible": true,
+            "authored_summary": true
+          },
+          "source_id": "deepagents-old-package-policy",
+          "derivation_basis": "The source places the interactive Textual application and slash-command implementation under libs/cli.",
+          "metadata_derivation": {
+            "source_ref": "scenario namespace plus source-ledger order",
+            "observed_at": "public commit author timestamp",
+            "actor_and_kind": "closed modelVisibleEvent41 envelope",
+            "order": "source-backed events sorted by independently verified commit author timestamp"
+          }
+        },
+        {
+          "event_sha256": "d3e3a27e095206acd035604e6c62d31f6992466194cb067bc2165b4bb3f69554",
+          "event": {
+            "source_ref": "deepagents:turn-002",
+            "observed_at": "2026-05-16T01:28:14Z",
+            "actor": "user",
+            "kind": "message",
+            "summary": "Interactive coding-agent features, including slash commands, are implemented by the deepagents-code package under libs/code.",
+            "model_visible": true,
+            "authored_summary": true
+          },
+          "source_id": "deepagents-new-package-policy",
+          "derivation_basis": "The source places interactive coding-agent features, including slash commands, under the deepagents-code package in libs/code.",
+          "metadata_derivation": {
+            "source_ref": "scenario namespace plus source-ledger order",
+            "observed_at": "public commit author timestamp",
+            "actor_and_kind": "closed modelVisibleEvent41 envelope",
+            "order": "first statement derived from the same source record; lexical source_ref tie-break only"
+          }
+        },
+        {
+          "event_sha256": "ffc179d21f50cfca0defa331f6ff766464c6837cee3191c27f1cb9a22786796f",
+          "event": {
+            "source_ref": "deepagents:turn-003",
+            "observed_at": "2026-05-16T01:28:14Z",
+            "actor": "user",
+            "kind": "message",
+            "summary": "The deepagents-cli package provides the init, dev, and deploy commands.",
+            "model_visible": true,
+            "authored_summary": true
+          },
+          "source_id": "deepagents-new-package-policy",
+          "derivation_basis": "The same source defines the deepagents-cli package surface as the init, dev, and deploy commands.",
+          "metadata_derivation": {
+            "source_ref": "scenario namespace plus source-ledger order",
+            "observed_at": "same public commit author timestamp as turn-002",
+            "actor_and_kind": "closed modelVisibleEvent41 envelope",
+            "order": "second statement derived from the same source record; lexical source_ref tie-break only and no temporal role"
+          }
+        },
+        {
+          "event_sha256": "eecc65bc2e663e2d6a3c6f6a5db588a5533e967a5d2c126f9c4cb39ed0edc4e1",
+          "event": {
+            "source_ref": "deepagents:turn-004",
+            "observed_at": "2026-07-18T00:00:01Z",
+            "actor": "user",
+            "kind": "message",
+            "summary": "Handoff task: add a /context slash command and startup tip for the interactive coding agent, together with package tests.",
+            "model_visible": true,
+            "authored_summary": true
+          },
+          "source_id": null,
+          "derivation_basis": "Neutral authored handoff task fixed independently of any relation label, required-memory answer, hidden test, or expected patch.",
+          "metadata_derivation": {
+            "source_ref": "scenario namespace plus neutral setup order",
+            "observed_at": "frozen scenario authoring epoch plus one second",
+            "actor_and_kind": "closed modelVisibleEvent41 envelope",
+            "order": "handoff task is last and is not used as a relation endpoint"
+          }
+        }
+      ]
+    }
+  ]
+}

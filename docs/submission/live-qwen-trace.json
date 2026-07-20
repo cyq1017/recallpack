@@ -1,0 +1,74 @@
+{
+  "actual_qwen_token_usage": {
+    "embedding_total_tokens": 20,
+    "memory_decision_total_tokens": 301,
+    "rerank_total_tokens": 29
+  },
+  "contract_summary": [
+    "memory_decision live trace captured",
+    "text-embedding-v4 live trace captured",
+    "qwen3-rerank live trace captured"
+  ],
+  "deterministic_runtime_work": [
+    "event ordering and lease fencing",
+    "schema validation and failure handling",
+    "active/superseded lifecycle filtering",
+    "512-token budget selection",
+    "PACK.md and recallpack.json assembly"
+  ],
+  "live_qwen_run": true,
+  "live_status": "live_contract_passed",
+  "provider_traces": [
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 2,
+      "input_token_estimate": 165,
+      "is_live": true,
+      "model_name": "qwen-plus",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 14,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_query"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 11,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 25,
+      "is_live": true,
+      "model_name": "qwen3-rerank",
+      "output_item_count": 1,
+      "provider_role": "rerank",
+      "request_id_present": true,
+      "request_purpose": "precision_rerank_active_memory_candidates"
+    }
+  ],
+  "qwen_model_work": [
+    "memory extraction, type classification, and supersession judgment",
+    "candidate memory retrieval with text-embedding-v4",
+    "precision reranking with qwen3-rerank"
+  ],
+  "region_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "rerank_base_url": "https://dashscope.aliyuncs.com/compatible-api/v1"
+}

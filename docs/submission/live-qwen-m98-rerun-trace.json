@@ -1,0 +1,591 @@
+{
+  "actual_qwen_token_usage": {
+    "embedding_total_tokens": 643,
+    "memory_decision_total_tokens": 22266,
+    "patch_generation_total_tokens": 1631,
+    "rerank_total_tokens": 474
+  },
+  "baseline_selection": {
+    "candidate_count": 12,
+    "context_source": "live_embedding_top_n_rerank_raw_history",
+    "embedding_top_n_sources": [
+      "session-a:turn-001",
+      "session-a:turn-005",
+      "session-a:turn-006",
+      "session-a:turn-007"
+    ],
+    "ranked_sources": [
+      {
+        "rank_position": 1,
+        "similarity": 0.645066,
+        "source_ref": "session-a:turn-001"
+      },
+      {
+        "rank_position": 2,
+        "similarity": 0.624909,
+        "source_ref": "session-a:turn-005"
+      },
+      {
+        "rank_position": 3,
+        "similarity": 0.623466,
+        "source_ref": "session-a:turn-006"
+      },
+      {
+        "rank_position": 4,
+        "similarity": 0.580817,
+        "source_ref": "session-a:turn-007"
+      },
+      {
+        "rank_position": 5,
+        "similarity": 0.541593,
+        "source_ref": "session-a:turn-004"
+      },
+      {
+        "rank_position": 6,
+        "similarity": 0.504752,
+        "source_ref": "session-a:turn-012"
+      },
+      {
+        "rank_position": 7,
+        "similarity": 0.504571,
+        "source_ref": "session-a:turn-002"
+      },
+      {
+        "rank_position": 8,
+        "similarity": 0.469077,
+        "source_ref": "session-a:turn-010"
+      },
+      {
+        "rank_position": 9,
+        "similarity": 0.462985,
+        "source_ref": "session-a:turn-003"
+      },
+      {
+        "rank_position": 10,
+        "similarity": 0.461595,
+        "source_ref": "session-a:turn-011"
+      },
+      {
+        "rank_position": 11,
+        "similarity": 0.455482,
+        "source_ref": "session-a:turn-009"
+      },
+      {
+        "rank_position": 12,
+        "similarity": 0.451636,
+        "source_ref": "session-a:turn-008"
+      }
+    ],
+    "reranked_sources": [
+      {
+        "rerank_position": 1,
+        "source_ref": "session-a:turn-005"
+      },
+      {
+        "rerank_position": 2,
+        "source_ref": "session-a:turn-007"
+      },
+      {
+        "rerank_position": 3,
+        "source_ref": "session-a:turn-001"
+      },
+      {
+        "rerank_position": 4,
+        "source_ref": "session-a:turn-006"
+      }
+    ],
+    "retrieval_top_n": 4,
+    "selected_sources": [
+      "session-a:turn-005",
+      "session-a:turn-007"
+    ],
+    "selection_top_k": 2
+  },
+  "checks": {
+    "active_retry_selected": true,
+    "all_observe_events_completed": true,
+    "baseline_downstream_fails": false,
+    "baseline_downstream_reported": true,
+    "compile_status_ok": true,
+    "project_preference_selected": true,
+    "recallpack_downstream_passes": false,
+    "stale_retry_excluded": true
+  },
+  "compile_trace": {
+    "candidate_count": 3,
+    "embedding_top_n_count": 3,
+    "omitted_memory_ids": [],
+    "retrieval_mode": "embedding_top_n",
+    "retrieved_memory_ids": [
+      "mem_d6de5bf3c2604716ad5a5facacedc51a",
+      "mem_ab25d26ab224499db786682e153df4b5",
+      "mem_a34338e510074d81bb45b10e9228e7d0"
+    ],
+    "selected_count": 3
+  },
+  "deterministic_runtime_work": [
+    "event ordering and lease fencing",
+    "SQLite lifecycle writes and supersession edges",
+    "active/superseded lifecycle filtering",
+    "cosine similarity over provider embeddings",
+    "512-token budget selection"
+  ],
+  "downstream_patch_generation": {
+    "baseline": {
+      "accepted": true,
+      "execution_mode": "temp_repo_hidden_tests",
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "provider_role": "patch_generation",
+      "request_purpose": "generate_patch_from_goal_and_selected_context",
+      "summary": {
+        "failed": 1,
+        "passed": 2
+      }
+    },
+    "recallpack": {
+      "accepted": true,
+      "execution_mode": "temp_repo_hidden_tests",
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "provider_role": "patch_generation",
+      "request_purpose": "generate_patch_from_goal_and_selected_context",
+      "summary": {
+        "failed": 1,
+        "passed": 2
+      }
+    },
+    "same_provider_contract": true,
+    "used_gold_patch_variants": false
+  },
+  "excluded_sources_checked": [
+    "session-a:turn-001"
+  ],
+  "live_qwen_run": true,
+  "live_status": "live_e2e_failed",
+  "live_status_required_checks": [
+    "all_observe_events_completed",
+    "active_retry_selected",
+    "project_preference_selected",
+    "stale_retry_excluded",
+    "compile_status_ok",
+    "baseline_downstream_reported",
+    "recallpack_downstream_passes"
+  ],
+  "observe_status_counts": {
+    "200": 12
+  },
+  "observed_event_count": 12,
+  "pack_memory_segment_tokens": 172,
+  "project_id": "project-a",
+  "provider_traces": [
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 686,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id": "chatcmpl-96ef49b9-4631-91a7-859d-1d6879bd1f73",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 2,
+      "input_token_estimate": 781,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id": "chatcmpl-c2ec149e-f808-9179-9fdc-1d4c68b9984d",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 2,
+      "input_token_estimate": 781,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id": "chatcmpl-8affd2d1-f162-9938-8243-ae0034d333b8",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 3,
+      "input_token_estimate": 881,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id": "chatcmpl-a92feb52-716e-94f4-aa67-8e305bdbe1ed",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 988,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id": "chatcmpl-5d2130f2-67fc-9fe4-90f7-cbd1e6aca2fe",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 979,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id": "chatcmpl-46a464da-906a-9507-8c52-d3b23eb67153",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 982,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id": "chatcmpl-97d15dbc-3645-91c8-9ff8-f7830b22d1d3",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 977,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id": "chatcmpl-4c6f0d76-f655-9770-9155-f5ba088768f3",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 987,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id": "chatcmpl-19b56fb6-1faa-9678-89fa-6e7f5e8b7ae9",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 981,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id": "chatcmpl-d8065b68-3aea-924d-bfc5-e549636dcc73",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 5,
+      "input_token_estimate": 1075,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id": "chatcmpl-12141798-dda5-928e-8a44-dc7512c92c3b",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 6,
+      "input_token_estimate": 1176,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id": "chatcmpl-f56dff56-2a4c-9249-991a-563699b57b16",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 18,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "c6df4527-bcf7-9c00-840e-0eab19f65a88",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_query"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 32,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "4cafac1e-8355-9795-8412-11bfeac1753c",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 36,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "c8d2944c-2bed-9cde-b88e-cd73041b33d3",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 30,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "370c4465-96a6-9da7-a501-2d88af164c01",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 18,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "f5b23dd1-7787-9387-84f2-5305b86b0073",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_query"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 39,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "a41ba04f-f45c-92f2-b46a-fc09b427b421",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 36,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "2c7e072c-854f-9e86-9950-34b349cb23a3",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 36,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "253d0867-bfbe-9caa-a142-42e8f5b46efc",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 40,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "8a98d5e0-2019-9473-afa7-b9c04892185d",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 46,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "f32e5ccd-3c22-9f1f-aeae-4cc9559dffa9",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 38,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "f9c09597-185e-94c7-be1c-0c7189763fe6",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 41,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "2c567818-937b-9b36-aa59-9d13e8bb67aa",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 35,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "7d023b0e-91f8-90b9-9ed7-b40551e54da2",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 45,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "783e98d6-0193-9b5a-bf05-b81869497960",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 39,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "e72585e7-495f-9d06-8aa2-62adaf9225de",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 35,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "ad42345b-472e-990d-b453-e2eef3975f44",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 41,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "6404c24e-56bf-9cb2-9751-c3bf68eeccbb",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 3,
+      "input_token_estimate": 115,
+      "is_live": true,
+      "model_name": "qwen3-rerank",
+      "output_item_count": 3,
+      "provider_role": "rerank",
+      "request_id": "9d0fb488-4621-922c-a83b-14ddaf1f19f3",
+      "request_id_present": true,
+      "request_purpose": "precision_rerank_active_memory_candidates"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 180,
+      "is_live": true,
+      "model_name": "qwen3-rerank",
+      "output_item_count": 4,
+      "provider_role": "rerank",
+      "request_id": "bc36518c-1645-9787-bf51-33d81c74c768",
+      "request_id_present": true,
+      "request_purpose": "precision_rerank_active_memory_candidates"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 3,
+      "input_token_estimate": 35,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "patch_generation",
+      "request_id": "chatcmpl-d96e8896-ee65-9a4f-8eac-e8022e390b6f",
+      "request_id_present": true,
+      "request_purpose": "generate_patch_from_goal_and_selected_context"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 43,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "patch_generation",
+      "request_id": "chatcmpl-cf72455b-cf52-902c-8d2b-4b4bd4f8f8a3",
+      "request_id_present": true,
+      "request_purpose": "generate_patch_from_goal_and_selected_context"
+    }
+  ],
+  "qwen_model_work": [
+    "memory extraction, type classification, and supersession judgment",
+    "candidate memory retrieval with text-embedding-v4",
+    "precision reranking with qwen3-rerank"
+  ],
+  "region_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "rerank_base_url": "https://dashscope.aliyuncs.com/compatible-api/v1",
+  "run_completed_at": "2026-07-04T02:40:39+00:00",
+  "scenario": "hero_observe_compile",
+  "selected_sources": [
+    "session-a:turn-005",
+    "session-a:turn-003",
+    "session-a:turn-004"
+  ]
+}

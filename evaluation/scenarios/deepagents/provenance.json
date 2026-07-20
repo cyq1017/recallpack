@@ -1,0 +1,29 @@
+{
+  "record_type": "scenario_provenance",
+  "scenario_slot": "deepagents",
+  "evidence_class": "source_backed_synthetic",
+  "production_trace": false,
+  "copied_source_text": false,
+  "authored_summaries": true,
+  "repository_url": "https://github.com/langchain-ai/deepagents",
+  "source_urls": [
+    "https://github.com/langchain-ai/deepagents/blob/18bf86d5fcb9245af9aed1fefe5d80b2200f9cfc/AGENTS.md",
+    "https://github.com/langchain-ai/deepagents/commit/c7b311933da6245267f4bded050c36279973de1e",
+    "https://github.com/langchain-ai/deepagents/blob/c7b311933da6245267f4bded050c36279973de1e/AGENTS.md",
+    "https://github.com/langchain-ai/deepagents/blob/c7b311933da6245267f4bded050c36279973de1e/LICENSE"
+  ],
+  "commit_refs": [
+    "18bf86d5fcb9245af9aed1fefe5d80b2200f9cfc",
+    "c7b311933da6245267f4bded050c36279973de1e"
+  ],
+  "license_id": "MIT",
+  "license_status": "verified_from_repository_license",
+  "review_status": "pending_independent_evidence_review",
+  "limitations": [
+    "The event stream is an authored summary, not a production trace.",
+    "The interactive package policy transition from turn 001 to turn 002 is source-backed; turns 002 and 003 are distinct coexisting package responsibilities derived from the same new source record and timestamp, so turn 003 is a hard negative rather than an authored lifecycle endpoint.",
+    "Only the handoff task in turn 004 is neutral authored evaluation setup.",
+    "The packet demonstrates a policy-evolution shape, not incident frequency.",
+    "No source text or repository code is copied into the scenario."
+  ]
+}

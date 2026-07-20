@@ -1,0 +1,168 @@
+{
+  "ai_tools_used": "AI tools were used for strategy review, coding assistance, test planning,\ndocumentation drafting, and local verification support. The project itself uses\nQwen Cloud capabilities in the memory decision, embedding retrieval, and rerank\nprovider path, with sanitized trace evidence checked into the repo.",
+  "built_with": [
+    "Python 3 standard library",
+    "SQLite",
+    "JavaScript, HTML, CSS",
+    "Docker",
+    "Alibaba Cloud ECS target design",
+    "Qwen text model",
+    "text-embedding-v4",
+    "qwen3-rerank"
+  ],
+  "copy_sources": {
+    "ai_tools_used": "docs/submission/devpost-final-copy.md#which-ai-tools-have-you-leveraged",
+    "built_with": "docs/submission/devpost-final-copy.md#built-with",
+    "elevator_pitch": "docs/submission/devpost-final-copy.md#elevator-pitch",
+    "local_evidence": "docs/submission/hackathon-fields.md#local-evidence",
+    "project_story": "docs/submission/devpost-final-copy.md#project-story",
+    "short_description": "docs/submission/hackathon-fields.md#short-description"
+  },
+  "devpost_upload_state": {
+    "devpost_section": "Additional info",
+    "final_submit_performed": false,
+    "not_uploaded": [
+      "docs/submission/media/alibaba-cloud-deployment-proof.png",
+      "docs/submission/media/recallpack-judge-deck.pptx"
+    ],
+    "notes": [
+      "Devpost was left on the finalization page after Save & continue.",
+      "Do not upload future media without a privacy/sensitive-info check first."
+    ],
+    "recorded_at": "2026-07-05T05:19:02+08:00",
+    "remaining_manual_items": [
+      "final presentation PPT upload or link",
+      "final video URL or upload",
+      "final Devpost submit approval",
+      "final media order confirmation"
+    ],
+    "status": "additional_info_media_uploaded",
+    "uploads": [
+      {
+        "field": "Architecture Diagram",
+        "filename": "architecture-diagram.png",
+        "path": "docs/submission/media/architecture-diagram.png",
+        "privacy_check_summary": "Visual check found no personal contact info, credentials, private local paths, or account console data.",
+        "privacy_checked": true,
+        "upload_performed": true
+      },
+      {
+        "field": "Screenshot showing proof of Alibaba Cloud Deployment",
+        "filename": "alibaba-cloud-deployment-proof-redacted.png",
+        "path": "docs/submission/media/alibaba-cloud-deployment-proof-redacted.png",
+        "privacy_check_summary": "Uploaded redacted copy only; the original deployment proof PNG was not uploaded.",
+        "privacy_checked": true,
+        "redacted": true,
+        "redacted_items": [
+          "public ECS IP address",
+          "GitHub account-like repository owner"
+        ],
+        "source_path": "docs/submission/media/alibaba-cloud-deployment-proof.png",
+        "upload_performed": true
+      },
+      {
+        "field": "Presentation PPT",
+        "filename": "recallpack-judge-deck.pptx",
+        "path": "docs/submission/media/recallpack-judge-deck.pptx",
+        "privacy_check_summary": "Rendered all six slides and scanned PPTX text/XML and metadata. No personal contact information, credentials, private local paths, raw API keys, public ECS endpoint, or repository owner identifier was found.",
+        "privacy_checked": true,
+        "upload_performed": false
+      }
+    ]
+  },
+  "elevator_pitch": "RecallPack is a MemoryAgent project that keeps coding-agent handoffs from\nacting on stale project memory. In stored live runs, Qwen judged supersession at\nwrite time, when old and new decisions were both visible; the credential-free\nlocal demo replays deterministic provider-compatible deciders. `/compile` then\npacks only active task-relevant memories for a fresh coding agent.",
+  "fresh_m98_live_rerun_status": "live_e2e_failed",
+  "gated_actions": [
+    "presentation_upload",
+    "devpost_submission",
+    "video_upload"
+  ],
+  "live_qwen_e2e_status": "live_e2e_passed",
+  "manual_blockers": [
+    "final presentation PPT upload or link",
+    "final video URL or upload",
+    "final Devpost submit approval",
+    "final media order confirmation"
+  ],
+  "media_assets": [
+    {
+      "bytes": 99388,
+      "filename": "01-one-click-stale-memory-replay.png",
+      "height": 720,
+      "path": "docs/submission/media/m71-replay/01-one-click-stale-memory-replay.png",
+      "width": 1280
+    },
+    {
+      "bytes": 78909,
+      "filename": "02-recallpack-active-memory-pack.png",
+      "height": 720,
+      "path": "docs/submission/media/m71-replay/02-recallpack-active-memory-pack.png",
+      "width": 1280
+    },
+    {
+      "bytes": 72774,
+      "filename": "03-qwen-provider-evidence.png",
+      "height": 720,
+      "path": "docs/submission/media/m71-replay/03-qwen-provider-evidence.png",
+      "width": 1280
+    }
+  ],
+  "network_calls_made": false,
+  "no_public_action_performed": true,
+  "presentation_deck": {
+    "bytes": 309454,
+    "path": "docs/submission/media/recallpack-judge-deck.pptx",
+    "privacy_checked": true,
+    "slide_count": 6,
+    "status": "built",
+    "upload_performed": false
+  },
+  "project_name": "RecallPack",
+  "project_story": "### Inspiration\n\nMore context can make a coding agent worse when old decisions are stale.\nCoding agents can reason over conflicts when both sides of the conflict are in\ncontext. The handoff problem is earlier: under a budget, retrieval chooses what\nthe next agent receives. If the newer decision that reversed an old policy is\nomitted, the stale instruction just looks like project policy.\n\nRecallPack was built to make memory lifecycle first-class: remember useful\nproject decisions, supersede stale ones while the evidence is still visible in\nthe session stream, and recall only active memories that fit the current goal\nand budget.\n\nThe project is intentionally narrow: it is not a generic agent platform or a\ngeneric RAG layer. It focuses on one MemoryAgent problem for coding-agent\nhandoffs: preventing agents from acting on superseded project memory.\n\n### Why coding agents still need RecallPack\n\nModern coding agents are good at resolving contradictions after both sides are\nin context. The failure RecallPack targets happens before that reasoning step:\nunder a handoff budget, retrieval has already decided what the fresh agent sees.\nIf the active reversal is omitted, the stale decision looks authoritative.\n\nRecallPack makes that pre-reasoning selection safer by storing lifecycle state\nat write time. The next agent receives an active memory pack instead of raw\nhistory with stale decisions mixed in.\n\n### What It Does\n\nRecallPack has two runtime paths:\n\n- `/observe` ingests ordered session events and writes durable memory records\n  such as decisions, preferences, and lessons.\n- `/compile` retrieves active memory candidates for a goal, applies embedding\n  top-N retrieval, reranks candidates, and selects a bounded handoff pack with\n  provenance.\n\nThe demo shows three variants side by side:\n\n- raw full-history reference: all 12 events, not budget-comparable;\n- keyword-scored fake-embedding + rerank raw-history baseline: selected from\n  raw event text and reranked before top-k selection; it is not source-picked\n  from gold selected-source IDs, but its deterministic scoring terms are\n  fixture-authored for local replay;\n- RecallPack: active lifecycle-aware memory recall.\n\nThe first screen starts with the evidence boundary and a deterministic\nstale-memory failure replay: stale context is selected, the scripted local\nbaseline writes the wrong retry patch, fixture tests show 1/3, RecallPack\ncompiles the active memory pack, and the corrected patch passes 3/3. A\nfirst-run handoff simulator below it summarizes the same fresh-agent handoff.\nThe replay is credential-free local evidence of a failure class, not a claim\nthat live retrieval always picks the stale item.\n\nIn the hero proof, the local keyword-scored fake-embedding + rerank\nraw-history baseline recalls a superseded retry decision and produces the wrong\nretry patch. It passes 1/3 fixture downstream tests. RecallPack filters the\nstale decision, includes the active retry decision plus the dependency-free\npreference, and passes 3/3 fixture downstream tests. The live Qwen evidence is\nreported separately and disclosed first: two stored live raw-history\nembedding+rerank baseline runs selected the active retry decision and did not\nselect the stale retry decision; stored live RecallPack runs held lifecycle\nfiltering; and the downstream live patch-generation delta has one historical\npass, one failed retry-policy rerun, and one passing ProjectOdyssey live run. In\nthe latest ProjectOdyssey live trace, Qwen selected the required active sources,\nexcluded the stale policy, and the RecallPack live-generated patch passed 3/3\nfixture tests while the live raw-history baseline passed 1/3. This is\nsource-backed fixture integration evidence, not statistical validation of live\ndownstream performance.\n\nThe proof includes eight curated lifecycle regression fixtures: retry policy,\nconfig loader, cache policy, audit serializer, a non-isomorphic pagination\nfixture, a realistic API-client auth migration fixture, a source-backed AI\nprovider auth-header fixture inspired by public gateway/provider header\nfailures, and a source-backed ProjectOdyssey JIT fixture. They are designed to\ntest stale-memory handling behaviors, not to act as a broad benchmark. In each\nfixture, keyword-scored fake-embedding + rerank\nraw-history context keeps a superseded decision and passes only 1/3 downstream\nfixture tests in the local deterministic replay environment. RecallPack\nselects active memory and passes 3/3 fixture tests with the same local\ntemp-repo evaluator contract.\n\n### How It Uses Qwen Cloud\n\nRecallPack includes Qwen Cloud provider integration evidence for the intended provider path:\n\n- Qwen text model: memory extraction, type classification, duplicate\n  detection, and supersession judgment.\n- Current Qwen text adapter: OpenAI-compatible `tools/tool_choice` contract with\n  default model `qwen3.7-plus-2026-05-26`.\n- `text-embedding-v4`: candidate memory retrieval in the stored live E2E trace\n  and provider contract.\n- `qwen3-rerank`: precision improvement over embedding top-N candidates.\n- Gated downstream patch generation uses the same Qwen text-provider\n  `tools/tool_choice` contract; the checked-in sanitized traces record one\n  historical provider-path run that completed successfully, one failed\n  retry-policy rerun, and one passing ProjectOdyssey source-backed fixture run.\n  Local tests remain credential-free.\n\nDeterministic application code handles ordered event processing, lease/CAS\nstorage behavior, lifecycle state writes, token budgeting, pack assembly, and\nfixture-backed local verification.\n\nThe local demo displays standalone live API smoke passed, meaning the repo\ncontains a sanitized approved trace for memory_decision, embedding, and rerank.\nThe checked-in demo and unit tests do not read credentials or make live Qwen\ncalls.\n\n### How We Built It\n\nRecallPack is a small Python standard-library backend with a static demo UI:\n\n- SQLite-backed event and memory lifecycle storage.\n- Provider adapters for fake/local testing and live Qwen contract checks.\n- A deterministic lifecycle-regression fixture evaluator with a local context-keyed\n  patch-generation provider. The provider receives goal, selected context, and\n  allowed edit paths, then validates generated patches with fixture tests in a\n  temporary repo. It does not read gold patch variants.\n- A 32-event behavior contract fixture suite that checks memory-operation\n  behavior and stale-selection risk.\n- A sanitized public bundle builder that excludes internal execution notes,\n  generated caches, local machine paths, and credentials.\n- A Docker target for an Alibaba Cloud ECS-style runtime proof.\n\n### Challenges\n\nThe hardest part was making the comparison honest. Raw full history is useful\nas a coverage reference, but it is not budget-comparable. The local baseline is\na keyword-scored fake-embedding + rerank raw-history path over raw events, and\nits deterministic scoring terms are fixture-authored so the demo replay is\nreproducible. RecallPack uses active memory lifecycle state before rerank and\nbudget selection. Both the baseline and RecallPack route through the same\nlocal context-keyed patch provider, so the downstream proof no longer reads\ngold patch variants. The live `text-embedding-v4`, `qwen3-rerank`, and Qwen\npatch-generation evidence is the stored sanitized E2E trace, the failed\nretry-policy rerun, and the passing ProjectOdyssey source-backed fixture rerun.\nThe stored live raw-history embedding+rerank baseline traces selected\nthe active retry decision on this small fixture, so RecallPack does not claim a\nmeasured live baseline failure rate. The retry-policy rerun is recorded separately as\n`live-qwen-m98-rerun-trace.json`; it completed the live observe/compile path\nbut the live patch-generation proof did not pass 3/3 for RecallPack. The\nProjectOdyssey rerun is recorded as\n`projectodyssey-live-qwen-e2e-trace.json`; it selected both required active\nsources, excluded the stale JIT policy, and RecallPack live patch generation\npassed 3/3 fixture tests. The failed retry-policy trace remains stored as failed evidence\nand is not presented as a passing rerun.\n\nAnother challenge was making Qwen Cloud provider evidence visible without\nmaking local tests fragile. The solution is a strict provider trace contract:\nfake providers emit the same sanitized trace shape as live providers, and the\none approved live contract trace is stored without credentials, raw prompts,\nraw memories, or tool arguments.\n\nFor the public local backend, `/compile` uses deterministic keyword fake\nembedding/rerank providers through that same contract. This keeps the demo\ncredential-free while avoiding zero-vector or identity-rerank smoke behavior.\nWe also added and ran a gated live Qwen E2E runner for the hero\nobserve/compile lifecycle. The stored live provider-path trace records\n`live_e2e_passed`: Qwen handled memory decisions, `text-embedding-v4` handled\nretrieval, `qwen3-rerank` handled precision ranking, and the intended live\npatch-generation path completed successfully once. No credentials, raw prompts,\nraw memories, or tool arguments are recorded in that trace. The live runner now\nreports baseline failure instead of requiring it for pass status, and the\nraw-history baseline context is derived from embedding/rerank retrieval. The\nfresh retry-policy rerun result is `live_e2e_failed`: lifecycle filtering held, but the\ndownstream pass-rate delta did not reproduce. The latest ProjectOdyssey live\nrun is `live_e2e_passed`: live Qwen selected\n`session-h-current:turn-006` and `session-h-history:turn-004`, excluded the\nstale policy, and RecallPack live patch generation passed 3/3 ProjectOdyssey\nfixture tests. The stored passing traces demonstrate provider-path integration;\nthe failed retry-policy rerun demonstrates that live downstream reproducibility still\nneeds careful fixture-by-fixture validation; and the live baseline traces show\nretrieval can get the small retry fixture right without RecallPack.\n\n### What We Learned\n\nMemory quality is not just retrieval quality. For coding agents, memory needs a\nlifecycle: active, superseded, and provenance-backed. A stale memory\ncan be more harmful than no memory when it drives code edits.\n\n### Limits\n\n- Broad coding benchmark improvement.\n- Universal retrieval superiority.\n- Guaranteed live Qwen downstream success.\n- Replacement for coding-agent reasoning.\n\n### What Is Next\n\nThe public repository URL is recorded as\n`https://github.com/cyq1017/recallpack`. The local preflight validates the\nsanitized bundle but does not prove the remote repository contains the latest\nbundle, so the public clone should be rechecked before final submission. The\nremaining gated steps are final presentation PPT upload/link, final demo\nvideo/media upload, and final hackathon submission. A future live Qwen\nbenchmark should only be claimed after\nadditional independent scenarios pass, not from a single stored fixture run.\n\nCredential-free Alibaba Cloud ECS runtime proof is running at\n`http://101.133.224.223/` and passed the project judge smoke script.",
+  "repository_url": "https://github.com/cyq1017/recallpack",
+  "repository_url_required": false,
+  "required_upload_candidates": [
+    {
+      "bytes": 107290,
+      "filename": "architecture-diagram.png",
+      "height": 720,
+      "path": "docs/submission/media/architecture-diagram.png",
+      "privacy_check_summary": "Visual check found no personal contact info, credentials, private local paths, or account console data.",
+      "privacy_checked": true,
+      "redacted": false,
+      "upload_performed": true,
+      "width": 1280
+    },
+    {
+      "bytes": 111486,
+      "filename": "alibaba-cloud-deployment-proof-redacted.png",
+      "height": 720,
+      "path": "docs/submission/media/alibaba-cloud-deployment-proof-redacted.png",
+      "privacy_check_summary": "Uploaded redacted copy only; the original deployment proof PNG was not uploaded.",
+      "privacy_checked": true,
+      "redacted": true,
+      "upload_performed": true,
+      "width": 1280
+    }
+  ],
+  "requires_credentials": false,
+  "short_description": "RecallPack helps a coding agent carry useful project memory across sessions\nwithout leaking stale decisions into the next handoff. It observes ordered\nsession events, writes durable project memories, marks older memories as\nsuperseded through lifecycle edges, and compiles only active task-relevant\nmemory into an estimated 512-token serialized-memory pack.",
+  "status": "blocked_gated_actions",
+  "tagline": "Stale-aware memory lifecycle for coding-agent handoffs.",
+  "track": "MemoryAgent",
+  "verification": {
+    "preflight_status": "blocked_gated_actions",
+    "sanitized_bundle": "dist/recallpack-submission-20260720-231611",
+    "unit_tests": 585
+  },
+  "video_candidate": {
+    "bytes": 3107552,
+    "devpost_video_url": null,
+    "duration_seconds": 156.0,
+    "manifest_path": "docs/submission/media/video-candidate/manifest.json",
+    "path": "docs/submission/media/video-candidate/recallpack-demo-candidate.mp4",
+    "status": "built",
+    "upload_performed": false
+  },
+  "video_url_required": true
+}

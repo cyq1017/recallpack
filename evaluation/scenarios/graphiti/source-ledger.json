@@ -1,0 +1,10 @@
+{
+  "record_type": "source_ledger",
+  "scenario_slot": "graphiti",
+  "entries": [
+    {"source_ref": "graphiti:turn-001", "event_sha256": "9c5224743a453e71a07f096efab16931366caf0eb691549805357bd6db363c80", "model_visible": true},
+    {"source_ref": "graphiti:turn-002", "event_sha256": "7575f65280261d63aa6e9644a56244c9faf8f5004d4ba2e33bae5ffaca53927a", "model_visible": true},
+    {"source_ref": "graphiti:turn-003", "event_sha256": "4a21400ddb50e505974ca6149ad55130d153a78bbaaf9920cd8b6d4aba480b56", "model_visible": true},
+    {"source_ref": "graphiti:turn-004", "event_sha256": "d47a3159fd3d4de0d20124d3bdb16aefe3f5666ceaf5ea76b93da14bf88182d1", "model_visible": true}
+  ]
+}

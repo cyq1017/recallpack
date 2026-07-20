@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://recallpack.local/schemas/t053-phase2-custody-report-v4.json",
+  "title": "T053Phase2CustodyReportV4",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "semantic_rules_version",
+    "review_seed_sha256",
+    "seed_receipt_sha256",
+    "phase2_instruction_file_sha256",
+    "matrix_file_sha256",
+    "semantic_report_schema_file_sha256",
+    "custody_report_schema_file_sha256",
+    "source_cards_file_sha256",
+    "source_package_inventory_file_sha256",
+    "source_package_files",
+    "external_artifacts",
+    "semantic_report_jcs_sha256",
+    "semantic_report_bytes",
+    "authored_at",
+    "reviewed_at",
+    "final_eligibility_verdict"
+  ],
+  "properties": {
+    "record_type": {"const": "phase_2_custody_report_v4"},
+    "semantic_rules_version": {"const": "4.1"},
+    "review_seed_sha256": {"$ref": "#/$defs/sha256"},
+    "seed_receipt_sha256": {"$ref": "#/$defs/sha256"},
+    "phase2_instruction_file_sha256": {"$ref": "#/$defs/sha256"},
+    "matrix_file_sha256": {"$ref": "#/$defs/sha256"},
+    "semantic_report_schema_file_sha256": {"$ref": "#/$defs/sha256"},
+    "custody_report_schema_file_sha256": {"$ref": "#/$defs/sha256"},
+    "source_cards_file_sha256": {"$ref": "#/$defs/sha256"},
+    "source_package_inventory_file_sha256": {"$ref": "#/$defs/sha256"},
+    "source_package_files": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/sourceFile"}
+    },
+    "external_artifacts": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {"$ref": "#/$defs/externalArtifact"}
+    },
+    "semantic_report_jcs_sha256": {"$ref": "#/$defs/sha256"},
+    "semantic_report_bytes": {"type": "integer", "minimum": 1},
+    "authored_at": {"type": "string", "format": "date-time"},
+    "reviewed_at": {"type": "string", "format": "date-time"},
+    "final_eligibility_verdict": {"enum": ["pass", "reject"]}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sourceFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "sha256", "bytes"],
+      "properties": {
+        "source_id": {
+          "enum": [
+            "projectodyssey-old-policy",
+            "projectodyssey-new-policy",
+            "deepagents-old-package-policy",
+            "deepagents-new-package-policy"
+          ]
+        },
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "externalArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scenario_slot", "kind", "sha256", "bytes"],
+      "properties": {
+        "scenario_slot": {"enum": ["projectodyssey", "deepagents"]},
+        "kind": {"enum": ["required_memory_label_ledger", "relation_label_ledger", "leakage_review"]},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}

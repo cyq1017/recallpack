@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://recallpack.local/schemas/t053-semantic-adjudication-report-v4.json",
+  "title": "T053SemanticAdjudicationReportV4",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "semantic_rules_version",
+    "reviewer_id",
+    "reviewed_at",
+    "matrix_file_sha256",
+    "source_cards_file_sha256",
+    "source_package_inventory_file_sha256",
+    "source_package_files",
+    "scenario_reports",
+    "honesty_confirmations",
+    "final_verdict"
+  ],
+  "properties": {
+    "record_type": {"const": "semantic_adjudication_report_v4"},
+    "semantic_rules_version": {"const": "4.1"},
+    "reviewer_id": {"type": "string", "minLength": 1, "maxLength": 200},
+    "reviewed_at": {"type": "string", "format": "date-time"},
+    "matrix_file_sha256": {"$ref": "#/$defs/sha256"},
+    "source_cards_file_sha256": {"$ref": "#/$defs/sha256"},
+    "source_package_inventory_file_sha256": {"$ref": "#/$defs/sha256"},
+    "source_package_files": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/sourcePackageFile"}
+    },
+    "scenario_reports": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {"$ref": "#/$defs/scenarioReport"}
+    },
+    "honesty_confirmations": {"$ref": "#/$defs/honestyConfirmations"},
+    "final_verdict": {"enum": ["pass", "reject"]}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "caseId": {
+      "enum": ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "P1", "P2", "P3", "P4", "P5", "P6"]
+    },
+    "sourcePackageFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "sha256", "bytes", "hash_and_length_verified", "source_support_checked", "copying_checked"],
+      "properties": {
+        "source_id": {
+          "enum": [
+            "projectodyssey-old-policy",
+            "projectodyssey-new-policy",
+            "deepagents-old-package-policy",
+            "deepagents-new-package-policy"
+          ]
+        },
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "hash_and_length_verified": {"const": true},
+        "source_support_checked": {"const": true},
+        "copying_checked": {"const": true}
+      }
+    },
+    "eventReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_ref",
+        "event_sha256",
+        "applied_case_ids",
+        "decision",
+        "rationale",
+        "source_support_decision",
+        "copying_decision",
+        "metadata_derivation_decision"
+      ],
+      "properties": {
+        "source_ref": {"type": "string", "pattern": "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+$"},
+        "event_sha256": {"$ref": "#/$defs/sha256"},
+        "applied_case_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/caseId"}
+        },
+        "decision": {"enum": ["pass", "reject"]},
+        "rationale": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "source_support_decision": {"enum": ["pass", "reject", "not_applicable"]},
+        "copying_decision": {"enum": ["pass", "reject", "not_applicable"]},
+        "metadata_derivation_decision": {"enum": ["pass", "reject"]}
+      }
+    },
+    "wholeInputReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applied_case_ids", "decision", "rationale"],
+      "properties": {
+        "applied_case_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/caseId"}
+        },
+        "decision": {"enum": ["pass", "reject"]},
+        "rationale": {"type": "string", "minLength": 1, "maxLength": 4000}
+      }
+    },
+    "scenarioReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_slot",
+        "model_visible_snapshot_sha256",
+        "prompt_template_sha256",
+        "ordered_event_hashes",
+        "events",
+        "whole_input",
+        "leakage_review_sha256",
+        "final_verdict"
+      ],
+      "properties": {
+        "scenario_slot": {"enum": ["projectodyssey", "deepagents"]},
+        "model_visible_snapshot_sha256": {"$ref": "#/$defs/sha256"},
+        "prompt_template_sha256": {"$ref": "#/$defs/sha256"},
+        "ordered_event_hashes": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/sha256"}
+        },
+        "events": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {"$ref": "#/$defs/eventReport"}
+        },
+        "whole_input": {"$ref": "#/$defs/wholeInputReport"},
+        "leakage_review_sha256": {"$ref": "#/$defs/sha256"},
+        "final_verdict": {"enum": ["pass", "reject"]}
+      }
+    },
+    "honestyConfirmations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "no_relation_ledger_used_for_summary_authoring",
+        "no_required_memory_labels_used_for_summary_authoring",
+        "no_hidden_test_content_used",
+        "no_variant_output_used",
+        "no_expected_patch_used",
+        "source_bytes_reviewer_only",
+        "complete_composition_reviewed"
+      ],
+      "properties": {
+        "no_relation_ledger_used_for_summary_authoring": {"const": true},
+        "no_required_memory_labels_used_for_summary_authoring": {"const": true},
+        "no_hidden_test_content_used": {"const": true},
+        "no_variant_output_used": {"const": true},
+        "no_expected_patch_used": {"const": true},
+        "source_bytes_reviewer_only": {"const": true},
+        "complete_composition_reviewed": {"const": true}
+      }
+    }
+  }
+}

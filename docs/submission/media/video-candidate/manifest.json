@@ -1,0 +1,82 @@
+{
+  "devpost_video_url": null,
+  "duration_seconds": 156.0,
+  "manifest_path": "docs/submission/media/video-candidate/manifest.json",
+  "scenes": [
+    {
+      "caption": "RecallPack stores supersession before handoff selection loses the reversing decision.",
+      "duration_seconds": 18,
+      "id": "problem",
+      "image": "docs/submission/media/m71-replay/01-one-click-stale-memory-replay.png",
+      "title": "MemoryAgent, not generic RAG",
+      "voiceover": "When a fresh coding agent takes over, something has already decided what it gets to see. If selection keeps a decision the project later reversed, the agent may confidently write last week's code. RecallPack moves the decision earlier: judge supersession at write time, when old and reversing decisions are visible together before handoff budget selection."
+    },
+    {
+      "caption": "Stored live runs support lifecycle filtering, not a measured live baseline failure rate.",
+      "duration_seconds": 12,
+      "id": "live_boundary",
+      "image": "docs/submission/media/m71-replay/03-qwen-provider-evidence.png",
+      "title": "Live evidence boundary",
+      "voiceover": "The stored live Qwen evidence supports the lifecycle boundary. RecallPack excluded stale retry memory in stored live runs, but the stored raw-history embedding and rerank baseline selected the active retry decision on this small fixture. So the local replay is an authored failure-class illustration, not live frequency evidence."
+    },
+    {
+      "caption": "Authored deterministic raw-history replay selects stale retry memory and fixture tests pass only 1/3.",
+      "duration_seconds": 20,
+      "id": "baseline_failure",
+      "image": "docs/submission/media/m71-replay/01-one-click-stale-memory-replay.png",
+      "title": "Local replay stale context fails",
+      "voiceover": "In this deterministic local replay, the baseline raw-history path pulls the semantically similar old retry decision. That stale instruction produces the wrong retry patch, and the fixture tests show the consequence: one out of three passes."
+    },
+    {
+      "caption": "RecallPack keeps active memory separate from superseded history.",
+      "duration_seconds": 22,
+      "id": "lifecycle",
+      "image": "docs/submission/media/m71-replay/02-recallpack-active-memory-pack.png",
+      "title": "Remember, supersede, recall",
+      "voiceover": "RecallPack observes session events as memory lifecycle operations. It remembers decisions and preferences, supersedes the old retry policy, and keeps the active retry decision plus the no-new-dependencies preference."
+    },
+    {
+      "caption": "RecallPack active memory pack gives the local replay the correct patch: 3/3.",
+      "duration_seconds": 22,
+      "id": "recallpack_success",
+      "image": "docs/submission/media/m71-replay/02-recallpack-active-memory-pack.png",
+      "title": "Active memory passes",
+      "voiceover": "With the active memory pack, the local replay applies the current retry policy. The same fixture tests now pass three out of three. The lifecycle state changes what memory reaches the fresh agent before it reasons."
+    },
+    {
+      "caption": "Qwen text model, text-embedding-v4, and qwen3-rerank are separated from deterministic runtime work.",
+      "duration_seconds": 33,
+      "id": "qwen_boundary",
+      "image": "docs/submission/media/m71-replay/03-qwen-provider-evidence.png",
+      "title": "Qwen Cloud is load-bearing",
+      "voiceover": "The intended Qwen Cloud path has three model roles. The Qwen text model handles memory decisions and supersession judgment in the provider path. text embedding v four retrieves active memory candidates, and qwen three rerank improves precision before deterministic code assembles the budgeted pack. The public demo remains credential-free and displays sanitized live trace evidence, including one stored provider-path trace that completed successfully once and a fresh M98 failed trace where lifecycle filtering still held."
+    },
+    {
+      "caption": "Public repo, fresh-clone smoke, Docker/ECS proof, and bounded local tests are ready.",
+      "duration_seconds": 29,
+      "id": "judge_path",
+      "image": "docs/submission/media/m71-replay/03-qwen-provider-evidence.png",
+      "title": "Judge-run proof",
+      "voiceover": "The public repository is built from the sanitized bundle. Judges can run the fresh-clone smoke without credentials, and the Alibaba Cloud ECS endpoint runs the same credential-free demo surface. RecallPack prevents coding agents from acting on superseded project memory."
+    }
+  ],
+  "status": "built",
+  "target_duration_seconds": 156,
+  "title": "RecallPack Demo Video Candidate",
+  "toolchain": {
+    "ffmpeg": "/opt/homebrew/bin/ffmpeg",
+    "ffprobe": "/opt/homebrew/bin/ffprobe",
+    "say": "/usr/bin/say"
+  },
+  "truthfulness_boundary": [
+    "Local demo is credential-free and uses deterministic fake providers.",
+    "Stored live Qwen E2E trace is sanitized evidence; public demo does not call live Qwen.",
+    "Fresh M98 live rerun is stored as live_e2e_failed and must not be claimed as passed.",
+    "Stored live raw-history baseline traces selected active retry memory; the local stale failure is authored replay evidence.",
+    "This file is a local video candidate, not a Devpost video URL or upload proof."
+  ],
+  "upload_performed": false,
+  "video_path": "docs/submission/media/video-candidate/recallpack-demo-candidate.mp4",
+  "voice": "Samantha",
+  "voiceover_text": "When a fresh coding agent takes over, something has already decided what it gets to see. If selection keeps a decision the project later reversed, the agent may confidently write last week's code. RecallPack moves the decision earlier: judge supersession at write time, when old and reversing decisions are visible together before handoff budget selection.\n\nThe stored live Qwen evidence supports the lifecycle boundary. RecallPack excluded stale retry memory in stored live runs, but the stored raw-history embedding and rerank baseline selected the active retry decision on this small fixture. So the local replay is an authored failure-class illustration, not live frequency evidence.\n\nIn this deterministic local replay, the baseline raw-history path pulls the semantically similar old retry decision. That stale instruction produces the wrong retry patch, and the fixture tests show the consequence: one out of three passes.\n\nRecallPack observes session events as memory lifecycle operations. It remembers decisions and preferences, supersedes the old retry policy, and keeps the active retry decision plus the no-new-dependencies preference.\n\nWith the active memory pack, the local replay applies the current retry policy. The same fixture tests now pass three out of three. The lifecycle state changes what memory reaches the fresh agent before it reasons.\n\nThe intended Qwen Cloud path has three model roles. The Qwen text model handles memory decisions and supersession judgment in the provider path. text embedding v four retrieves active memory candidates, and qwen three rerank improves precision before deterministic code assembles the budgeted pack. The public demo remains credential-free and displays sanitized live trace evidence, including one stored provider-path trace that completed successfully once and a fresh M98 failed trace where lifecycle filtering still held.\n\nThe public repository is built from the sanitized bundle. Judges can run the fresh-clone smoke without credentials, and the Alibaba Cloud ECS endpoint runs the same credential-free demo surface. RecallPack prevents coding agents from acting on superseded project memory."
+}

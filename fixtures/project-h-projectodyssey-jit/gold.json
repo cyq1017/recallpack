@@ -1,0 +1,57 @@
+{
+  "project_id": "project-h-projectodyssey-jit",
+  "component": "ci_policy",
+  "fixture_structure": "source_backed_projectodyssey_jit_unrigged_retrieval",
+  "goal": "Fix the flaky Mojo JIT CI crash by updating retry handling.",
+  "baseline_embedding_mode": "deterministic_keyword_provider",
+  "allowed_edit_paths": ["src/ci_policy.py", "pyproject.toml"],
+  "initial_dependency_set": [],
+  "required_sources": ["session-h-current:turn-006", "session-h-history:turn-004"],
+  "stale_sources": ["session-h-history:turn-002"],
+  "hidden_test_kind": "ci_jit_policy",
+  "hidden_tests": [
+    "test_jit_crash_policy_disables_retry",
+    "test_jit_crash_policy_blocks_nonblocking_workarounds",
+    "test_ci_policy_no_new_dependencies"
+  ],
+  "current_policy_terms": ["minimal reproducer", "fix forward"],
+  "memory_events": {
+    "session-h-history:turn-002": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "ci_jit_policy",
+        "text": "Treat Mojo JIT crashes in CI as flaky compiler behavior and use retry loops, continue-on-error, or skip markers as temporary workarounds.",
+        "scope_level": "component",
+        "component": "ci_policy"
+      }
+    },
+    "session-h-history:turn-004": {
+      "operation": "write",
+      "memory": {
+        "type": "preference",
+        "subject": "dependency_policy",
+        "text": "Do not add new dependencies for CI or test-runner fixes.",
+        "scope_level": "project",
+        "component": null
+      }
+    },
+    "session-h-current:turn-006": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "ci_jit_policy",
+        "text": "Mojo JIT crashes are now real bugs. Do not add retry loops, continue-on-error, or skip markers; fix forward with a minimal reproducer.",
+        "scope_level": "component",
+        "component": "ci_policy"
+      },
+      "supersedes_candidates": [
+        {
+          "type": "decision",
+          "subject": "ci_jit_policy",
+          "component": "ci_policy"
+        }
+      ]
+    }
+  }
+}

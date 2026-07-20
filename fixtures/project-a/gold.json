@@ -1,0 +1,12 @@
+{
+  "goal": "Update the retry helper to follow the project's current retry policy.",
+  "allowed_edit_paths": ["src/retry.py", "pyproject.toml"],
+  "initial_dependency_set": [],
+  "required_sources": ["session-a:turn-005", "session-a:turn-003"],
+  "stale_sources": ["session-a:turn-001"],
+  "hidden_tests": [
+    "test_uses_current_retry_count",
+    "test_uses_current_backoff_policy",
+    "test_does_not_modify_dependencies"
+  ]
+}

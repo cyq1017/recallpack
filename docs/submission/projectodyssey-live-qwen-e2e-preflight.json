@@ -1,0 +1,199 @@
+{
+  "actual_qwen_token_usage": {
+    "embedding_total_tokens": 80,
+    "memory_decision_total_tokens": 120,
+    "patch_generation_total_tokens": 40,
+    "rerank_total_tokens": 16
+  },
+  "checks": {
+    "embedding_and_rerank_paths_reachable": true,
+    "expected_live_e2e_would_pass_with_contract_responses": true,
+    "memory_decision_request_contract_ready": true,
+    "patch_generation_path_reachable": true,
+    "required_sources_selected": true,
+    "stale_sources_excluded": true
+  },
+  "compatible_base_url": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+  "expected_baseline_selection": {
+    "candidate_count": 12,
+    "context_source": "live_embedding_top_n_rerank_raw_history",
+    "embedding_top_n_sources": [
+      "session-h-history:turn-002",
+      "session-h-history:turn-004",
+      "session-h-current:turn-006",
+      "session-h-history:turn-001"
+    ],
+    "ranked_sources": [
+      {
+        "rank_position": 1,
+        "similarity": 1.0,
+        "source_ref": "session-h-history:turn-002"
+      },
+      {
+        "rank_position": 2,
+        "similarity": 0.998618,
+        "source_ref": "session-h-history:turn-004"
+      },
+      {
+        "rank_position": 3,
+        "similarity": 0.267644,
+        "source_ref": "session-h-current:turn-006"
+      },
+      {
+        "rank_position": 4,
+        "similarity": 0.0,
+        "source_ref": "session-h-history:turn-001"
+      },
+      {
+        "rank_position": 5,
+        "similarity": 0.0,
+        "source_ref": "session-h-history:turn-003"
+      },
+      {
+        "rank_position": 6,
+        "similarity": 0.0,
+        "source_ref": "session-h-history:turn-005"
+      },
+      {
+        "rank_position": 7,
+        "similarity": 0.0,
+        "source_ref": "session-h-current:turn-001"
+      },
+      {
+        "rank_position": 8,
+        "similarity": 0.0,
+        "source_ref": "session-h-current:turn-002"
+      },
+      {
+        "rank_position": 9,
+        "similarity": 0.0,
+        "source_ref": "session-h-current:turn-003"
+      },
+      {
+        "rank_position": 10,
+        "similarity": 0.0,
+        "source_ref": "session-h-current:turn-004"
+      },
+      {
+        "rank_position": 11,
+        "similarity": 0.0,
+        "source_ref": "session-h-current:turn-005"
+      },
+      {
+        "rank_position": 12,
+        "similarity": 0.0,
+        "source_ref": "session-h-current:turn-007"
+      }
+    ],
+    "reranked_sources": [
+      {
+        "rerank_position": 1,
+        "source_ref": "session-h-history:turn-002"
+      },
+      {
+        "rerank_position": 2,
+        "source_ref": "session-h-history:turn-004"
+      },
+      {
+        "rerank_position": 3,
+        "source_ref": "session-h-current:turn-006"
+      },
+      {
+        "rerank_position": 4,
+        "source_ref": "session-h-history:turn-001"
+      }
+    ],
+    "retrieval_top_n": 4,
+    "selected_sources": [
+      "session-h-history:turn-002",
+      "session-h-history:turn-004"
+    ],
+    "selection_top_k": 2
+  },
+  "expected_downstream_tests": {
+    "baseline": "1/3",
+    "recallpack": "3/3"
+  },
+  "expected_selected_sources": [
+    "session-h-current:turn-006",
+    "session-h-history:turn-004"
+  ],
+  "live_qwen_run": false,
+  "memory_decision_request_contract": {
+    "all_decision_policy_present": true,
+    "all_descriptive_tool_schema": true,
+    "all_enable_thinking_false": true,
+    "all_structured_event_metadata": true,
+    "all_tool_choice_function": true,
+    "request_count": 12,
+    "source_refs_seen": [
+      "session-h-current:turn-001",
+      "session-h-current:turn-002",
+      "session-h-current:turn-003",
+      "session-h-current:turn-004",
+      "session-h-current:turn-005",
+      "session-h-current:turn-006",
+      "session-h-current:turn-007",
+      "session-h-history:turn-001",
+      "session-h-history:turn-002",
+      "session-h-history:turn-003",
+      "session-h-history:turn-004",
+      "session-h-history:turn-005"
+    ]
+  },
+  "model_name": "qwen3.7-plus-2026-05-26",
+  "network_calls_made": false,
+  "next_gated_action": "Rerun live Qwen E2E only after explicit approval; preflight does not read credentials or call Qwen.",
+  "patch_generation_preflight": {
+    "all_allowed_paths_present": true,
+    "all_enable_thinking_false": true,
+    "all_input_fields_present": true,
+    "all_tool_choice_function": true,
+    "request_count": 2,
+    "same_provider_contract": true
+  },
+  "preflight_status": "ready_for_live_e2e_rerun",
+  "project_id": "project-h-projectodyssey-jit",
+  "provider_trace_roles": [
+    "memory_decision",
+    "memory_decision",
+    "memory_decision",
+    "memory_decision",
+    "memory_decision",
+    "memory_decision",
+    "memory_decision",
+    "memory_decision",
+    "memory_decision",
+    "memory_decision",
+    "memory_decision",
+    "memory_decision",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "embedding",
+    "rerank",
+    "rerank",
+    "patch_generation",
+    "patch_generation"
+  ],
+  "request_role_counts": {
+    "embedding": 16,
+    "memory_decision": 12,
+    "patch_generation": 2,
+    "rerank": 2
+  },
+  "rerank_base_url": "https://dashscope-intl.aliyuncs.com/compatible-api/v1",
+  "scenario": "projectodyssey_observe_compile_preflight"
+}

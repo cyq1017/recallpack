@@ -1,0 +1,1 @@
+{"version":"1.0","tests":["tests.test_package_policy.PackagePolicyHiddenTests.test_context_command_uses_code_package","tests.test_package_policy.PackagePolicyHiddenTests.test_startup_tip_uses_code_package","tests.test_package_policy.PackagePolicyHiddenTests.test_deployment_command_stays_in_cli_package"]}

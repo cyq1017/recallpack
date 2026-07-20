@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RecallPack Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Qwen Cloud Hackathon - MemoryAgent</p>
+        <h1>RecallPack</h1>
+      </div>
+      <div class="status-strip" aria-label="Demo status">
+        <span>Local fixture demo</span>
+        <span>512-token pack</span>
+        <span>No live cloud calls</span>
+      </div>
+    </header>
+
+    <nav class="tabbar" aria-label="Demo views"></nav>
+
+    <main id="app" class="app-shell" aria-live="polite"></main>
+
+    <script src="./demo-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

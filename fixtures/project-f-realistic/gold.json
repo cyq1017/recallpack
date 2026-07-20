@@ -1,0 +1,82 @@
+{
+  "project_id": "project-f-realistic",
+  "component": "api_client",
+  "fixture_structure": "realistic_repo_style_multi_session_with_noise",
+  "goal": "Update the API client to the current authentication and timeout policy.",
+  "allowed_edit_paths": ["src/api_client.py", "pyproject.toml"],
+  "initial_dependency_set": [],
+  "required_sources": ["session-f-fix:turn-006", "session-f-setup:turn-004"],
+  "stale_sources": ["session-f-setup:turn-002"],
+  "hidden_test_kind": "api_client_policy",
+  "hidden_tests": [
+    "test_uses_x_api_key_header",
+    "test_timeout_is_ten_seconds",
+    "test_api_client_no_new_dependencies"
+  ],
+  "current_policy_terms": ["x-api-key", "timeout=10"],
+  "baseline_downrank_phrases": [
+    "after the vendor gateway migration",
+    "replace the old authorization header plan",
+    "current handoff task",
+    "hidden gateway tests expect",
+    "src/api_client.py currently uses"
+  ],
+  "baseline_embedding_terms": {
+    "primary": ["api", "client", "authentication", "auth", "header", "token", "authorization", "timeout", "policy"],
+    "secondary": ["public", "function", "request", "headers", "build_request"],
+    "current": ["x-api-key", "timeout=10", "gateway"]
+  },
+  "memory_events": {
+    "session-f-setup:turn-002": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "api_auth_policy",
+        "text": "Use Authorization: Bearer token and timeout=5 for API client requests.",
+        "scope_level": "component",
+        "component": "api_client"
+      }
+    },
+    "session-f-setup:turn-004": {
+      "operation": "write",
+      "memory": {
+        "type": "preference",
+        "subject": "dependency_policy",
+        "text": "Do not add new dependencies for API client changes.",
+        "scope_level": "project",
+        "component": null
+      }
+    },
+    "session-f-fix:turn-006": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "api_auth_policy",
+        "text": "Use X-Api-Key and timeout=10 for API client requests.",
+        "scope_level": "component",
+        "component": "api_client"
+      },
+      "supersedes_candidates": [
+        {
+          "type": "decision",
+          "subject": "api_auth_policy",
+          "component": "api_client"
+        }
+      ]
+    }
+  },
+  "patch_variants": {
+    "stale": [
+      {
+        "path": "src/api_client.py",
+        "content": "def build_request(path, token, timeout=5):\n    return {\"path\": path, \"headers\": {\"Authorization\": f\"Bearer {token}\"}, \"timeout\": timeout}\n"
+      }
+    ],
+    "current": [
+      {
+        "path": "src/api_client.py",
+        "content": "def build_request(path, api_key, timeout=10):\n    return {\"path\": path, \"headers\": {\"X-Api-Key\": api_key}, \"timeout\": timeout}\n"
+      }
+    ]
+  }
+}

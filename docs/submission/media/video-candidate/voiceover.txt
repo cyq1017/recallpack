@@ -1,0 +1,13 @@
+When a fresh coding agent takes over, something has already decided what it gets to see. If selection keeps a decision the project later reversed, the agent may confidently write last week's code. RecallPack moves the decision earlier: judge supersession at write time, when old and reversing decisions are visible together before handoff budget selection.
+
+The stored live Qwen evidence supports the lifecycle boundary. RecallPack excluded stale retry memory in stored live runs, but the stored raw-history embedding and rerank baseline selected the active retry decision on this small fixture. So the local replay is an authored failure-class illustration, not live frequency evidence.
+
+In this deterministic local replay, the baseline raw-history path pulls the semantically similar old retry decision. That stale instruction produces the wrong retry patch, and the fixture tests show the consequence: one out of three passes.
+
+RecallPack observes session events as memory lifecycle operations. It remembers decisions and preferences, supersedes the old retry policy, and keeps the active retry decision plus the no-new-dependencies preference.
+
+With the active memory pack, the local replay applies the current retry policy. The same fixture tests now pass three out of three. The lifecycle state changes what memory reaches the fresh agent before it reasons.
+
+The intended Qwen Cloud path has three model roles. The Qwen text model handles memory decisions and supersession judgment in the provider path. text embedding v four retrieves active memory candidates, and qwen three rerank improves precision before deterministic code assembles the budgeted pack. The public demo remains credential-free and displays sanitized live trace evidence, including one stored provider-path trace that completed successfully once and a fresh M98 failed trace where lifecycle filtering still held.
+
+The public repository is built from the sanitized bundle. Judges can run the fresh-clone smoke without credentials, and the Alibaba Cloud ECS endpoint runs the same credential-free demo surface. RecallPack prevents coding agents from acting on superseded project memory.

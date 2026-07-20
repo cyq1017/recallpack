@@ -1,0 +1,1 @@
+{"version":"1.0","tests":["tests.test_ci_policy.CiPolicyHiddenTests.test_fail_and_fix_forward","tests.test_ci_policy.CiPolicyHiddenTests.test_no_retry_skip_or_continue_workaround","tests.test_ci_policy.CiPolicyHiddenTests.test_requires_minimal_reproducer"]}

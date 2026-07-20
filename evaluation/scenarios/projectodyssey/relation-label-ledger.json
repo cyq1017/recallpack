@@ -1,0 +1,9 @@
+{
+  "record_type": "relation_label_ledger",
+  "scenario_slot": "projectodyssey",
+  "source_ledger_sha256": "77dbf0600d87e7e67d8c9753f6d5912b60d286ff516c41746015a72f00e19331",
+  "entries": [
+    {"opportunity_id": "opp_projectodyssey_true_1", "prior_source_ref": "projectodyssey:turn-001", "candidate_source_ref": "projectodyssey:turn-002", "relation_kind": "true_supersession"},
+    {"opportunity_id": "opp_projectodyssey_hard_1", "prior_source_ref": "projectodyssey:turn-002", "candidate_source_ref": "projectodyssey:turn-003", "relation_kind": "hard_negative"}
+  ]
+}

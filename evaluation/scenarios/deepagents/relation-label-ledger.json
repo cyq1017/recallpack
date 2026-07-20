@@ -1,0 +1,9 @@
+{
+  "record_type": "relation_label_ledger",
+  "scenario_slot": "deepagents",
+  "source_ledger_sha256": "a026d28bda12cc725a4e5b53e2ca41a8037e38619b0ea03a6f30efd7f63ac5f1",
+  "entries": [
+    {"opportunity_id": "opp_deepagents_true_1", "prior_source_ref": "deepagents:turn-001", "candidate_source_ref": "deepagents:turn-002", "relation_kind": "true_supersession"},
+    {"opportunity_id": "opp_deepagents_hard_1", "prior_source_ref": "deepagents:turn-002", "candidate_source_ref": "deepagents:turn-003", "relation_kind": "hard_negative"}
+  ]
+}

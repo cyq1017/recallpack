@@ -1,0 +1,218 @@
+openapi: 3.1.0
+info:
+  title: RecallPack Compile Contract
+  version: 4.0.0
+paths:
+  /compile:
+    post:
+      operationId: compileRecallPack
+      summary: Compile active task-relevant memory under an exact budget
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompileRequest'
+      responses:
+        '200':
+          description: Immutable pack and three-file artifact bundle created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompileResponse'
+        '400':
+          description: Malformed request or invalid budget
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        '409':
+          description: Existing project memory requires explicit embedding backfill
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddingBackfillResponse'
+        '422':
+          description: Invalid component or budget smaller than the empty pack envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableResponse'
+        '503':
+          description: Provider, exact tokenizer, storage, or artifact failure; no final or partial artifact directory is published
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableResponse'
+components:
+  schemas:
+    CompileRequest:
+      type: object
+      additionalProperties: false
+      required: [project_id, goal, component, budget_tokens]
+      properties:
+        project_id:
+          type: string
+          minLength: 1
+          maxLength: 128
+        goal:
+          type: string
+          minLength: 1
+          maxLength: 20000
+        component:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: Must be present in the runtime component registry
+        budget_tokens:
+          type: integer
+          minimum: 1
+          maximum: 512
+    CompileResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - status_code
+        - compile_id
+        - pack
+        - exact_token_count
+        - tokenizer
+        - artifacts
+        - trace
+      properties:
+        status_code: {const: 200}
+        compile_id: {type: string, pattern: '^cmp_[A-Za-z0-9]+$'}
+        pack:
+          $ref: '#/components/schemas/RecallPack'
+        exact_token_count:
+          type: integer
+          minimum: 0
+          maximum: 512
+        tokenizer:
+          type: object
+          additionalProperties: false
+          required: [encoding, package, package_version, exact]
+          properties:
+            encoding: {const: o200k_base}
+            package: {const: tiktoken}
+            package_version: {const: 0.13.0}
+            exact: {const: true}
+        artifacts:
+          type: object
+          additionalProperties: false
+          required: [recallpack_json, pack_md, trace_json]
+          properties:
+            recallpack_json: {$ref: '#/components/schemas/RecallpackJsonArtifactRef'}
+            pack_md: {$ref: '#/components/schemas/PackMarkdownArtifactRef'}
+            trace_json: {$ref: '#/components/schemas/TraceJsonArtifactRef'}
+        trace:
+          type: object
+          additionalProperties: false
+          required:
+            - memory_snapshot_seq
+            - active_candidate_count
+            - embedding_top_n
+            - rerank_input_count
+            - selected_count
+            - omitted_count
+            - provider_mode
+          properties:
+            memory_snapshot_seq: {type: integer, minimum: 0}
+            active_candidate_count: {type: integer, minimum: 0}
+            embedding_top_n: {const: 20}
+            rerank_input_count: {type: integer, minimum: 0, maximum: 20}
+            selected_count: {type: integer, minimum: 0}
+            omitted_count: {type: integer, minimum: 0}
+            provider_mode: {type: string, enum: [fake, live]}
+    RecallPack:
+      type: object
+      additionalProperties: false
+      required: [memories]
+      properties:
+        memories:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackMemory'
+    PackMemory:
+      type: object
+      additionalProperties: false
+      required: [id, type, subject, text, scope, source_ref]
+      properties:
+        id: {type: string}
+        type: {type: string, enum: [decision, preference, lesson]}
+        subject: {type: string}
+        text: {type: string}
+        scope: {type: string}
+        source_ref: {type: string}
+    ArtifactRefBase:
+      type: object
+      additionalProperties: false
+      required: [name, sha256, bytes]
+      properties:
+        name: {type: string}
+        sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+        bytes: {type: integer, minimum: 0}
+    RecallpackJsonArtifactRef:
+      allOf:
+        - {$ref: '#/components/schemas/ArtifactRefBase'}
+        - type: object
+          properties:
+            name: {const: recallpack.json}
+    PackMarkdownArtifactRef:
+      allOf:
+        - {$ref: '#/components/schemas/ArtifactRefBase'}
+        - type: object
+          properties:
+            name: {const: PACK.md}
+    TraceJsonArtifactRef:
+      allOf:
+        - {$ref: '#/components/schemas/ArtifactRefBase'}
+        - type: object
+          properties:
+            name: {const: trace.json}
+    BadRequestResponse:
+      type: object
+      additionalProperties: false
+      required: [status_code, error]
+      properties:
+        status_code: {const: 400}
+        error:
+          type: string
+          enum:
+            - invalid_json
+            - invalid_request
+            - invalid_budget
+    EmbeddingBackfillResponse:
+      type: object
+      additionalProperties: false
+      required: [status_code, error]
+      properties:
+        status_code: {const: 409}
+        error: {const: memory_embedding_backfill_required}
+    UnprocessableResponse:
+      type: object
+      additionalProperties: false
+      required: [status_code, error]
+      properties:
+        status_code: {const: 422}
+        error:
+          type: string
+          enum:
+            - invalid_component
+            - budget_too_small
+    ServiceUnavailableResponse:
+      type: object
+      additionalProperties: false
+      required: [status_code, error, artifacts_published]
+      properties:
+        status_code: {const: 503}
+        artifacts_published: {const: false}
+        error:
+          type: string
+          enum:
+            - embedding_failure
+            - rerank_failure
+            - tokenizer_unavailable
+            - storage_failure
+            - artifact_validation_failed
+            - artifact_publication_failed

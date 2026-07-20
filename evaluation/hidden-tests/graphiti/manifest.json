@@ -1,0 +1,1 @@
+{"version":"1.0","tests":["tests.test_backend_policy.BackendPolicyHiddenTests.test_new_example_uses_maintained_backend","tests.test_backend_policy.BackendPolicyHiddenTests.test_new_example_avoids_deprecated_backend","tests.test_backend_policy.BackendPolicyHiddenTests.test_legacy_compatibility_remains_available"]}

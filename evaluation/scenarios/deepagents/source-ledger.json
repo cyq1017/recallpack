@@ -1,0 +1,10 @@
+{
+  "record_type": "source_ledger",
+  "scenario_slot": "deepagents",
+  "entries": [
+    {"source_ref": "deepagents:turn-001", "event_sha256": "f9c2c2e8e97741b16aeac91bab1b5eaad886e64860e58d5bcf06ed0965f9e9b0", "model_visible": true},
+    {"source_ref": "deepagents:turn-002", "event_sha256": "d3e3a27e095206acd035604e6c62d31f6992466194cb067bc2165b4bb3f69554", "model_visible": true},
+    {"source_ref": "deepagents:turn-003", "event_sha256": "ffc179d21f50cfca0defa331f6ff766464c6837cee3191c27f1cb9a22786796f", "model_visible": true},
+    {"source_ref": "deepagents:turn-004", "event_sha256": "eecc65bc2e663e2d6a3c6f6a5db588a5533e967a5d2c126f9c4cb39ed0edc4e1", "model_visible": true}
+  ]
+}

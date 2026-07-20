@@ -1,0 +1,10 @@
+{
+  "record_type": "source_ledger",
+  "scenario_slot": "projectodyssey",
+  "entries": [
+    {"source_ref": "projectodyssey:turn-001", "event_sha256": "fbc2fd442199b8515224f1f400aebbe9e4442ad0843ef8db9b466f9be9c99379", "model_visible": true},
+    {"source_ref": "projectodyssey:turn-002", "event_sha256": "8125f81bd3943fb3fe58164cb4df1d8bf2a015cf0e7a826e6781b4a4003d5067", "model_visible": true},
+    {"source_ref": "projectodyssey:turn-003", "event_sha256": "6f461a3b065ce7c123b74100d72dfe533c6c8c387ae6dc3aa5166826338fb5a6", "model_visible": true},
+    {"source_ref": "projectodyssey:turn-004", "event_sha256": "af694af955481570e3d82d6dff6549657746927235c75fb447ed62159412c6eb", "model_visible": true}
+  ]
+}

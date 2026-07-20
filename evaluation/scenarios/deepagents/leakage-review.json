@@ -1,0 +1,23 @@
+{
+  "record_type": "leakage_review",
+  "scenario_slot": "deepagents",
+  "review_status": "pending_independent_evidence_review",
+  "checks": {
+    "copied_source_text": false,
+    "hidden_test_text_model_visible": false,
+    "gold_source_ids_model_visible": false,
+    "relation_labels_model_visible": false
+  },
+  "excluded_from_model": [
+    "relation-label-ledger.json",
+    "required source labels",
+    "stale source labels",
+    "hidden tests"
+  ],
+  "verdict": "diagnostic_only_until_external_review",
+  "limitations": [
+    "This is not a production trace.",
+    "Desired policy behavior is model-visible because it defines the coding task; hidden-test source, identifiers, relation labels, and evaluator labels remain excluded.",
+    "The authored deterministic patch transform is ineligible for headline evidence; independent leakage review and a non-fixture-specific provider are still required."
+  ]
+}

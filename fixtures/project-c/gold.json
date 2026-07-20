@@ -1,0 +1,79 @@
+{
+  "project_id": "project-c",
+  "component": "cache",
+  "goal": "Update the cache policy to the current tenant-aware key and TTL.",
+  "allowed_edit_paths": ["src/cache_policy.py", "pyproject.toml"],
+  "initial_dependency_set": [],
+  "required_sources": ["session-c:turn-005", "session-c:turn-003"],
+  "stale_sources": ["session-c:turn-001"],
+  "hidden_test_kind": "cache_policy",
+  "hidden_tests": [
+    "test_cache_key_includes_tenant",
+    "test_cache_ttl_is_current",
+    "test_cache_key_function_is_stable"
+  ],
+  "current_policy_terms": ["tenant id", "60"],
+  "baseline_downrank_phrases": [
+    "after cross-tenant cache collisions",
+    "current handoff task",
+    "replaces the earlier"
+  ],
+  "baseline_embedding_terms": {
+    "primary": ["cache", "key", "ttl", "policy", "user id", "300"],
+    "secondary": ["public", "function", "signature"],
+    "current": ["tenant", "60", "collision"]
+  },
+  "memory_events": {
+    "turn-001": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "cache_policy",
+        "text": "Build cache keys with only the user id and keep TTL at 300 seconds.",
+        "scope_level": "component",
+        "component": "cache"
+      }
+    },
+    "turn-003": {
+      "operation": "write",
+      "memory": {
+        "type": "preference",
+        "subject": "cache_public_api",
+        "text": "Keep build_cache_key(tenant_id, user_id) as the public function signature.",
+        "scope_level": "project",
+        "component": null
+      }
+    },
+    "turn-005": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "cache_policy",
+        "text": "Include tenant id in cache keys and use 60 second TTL.",
+        "scope_level": "component",
+        "component": "cache"
+      },
+      "supersedes_candidates": [
+        {
+          "type": "decision",
+          "subject": "cache_policy",
+          "component": "cache"
+        }
+      ]
+    }
+  },
+  "patch_variants": {
+    "stale": [
+      {
+        "path": "src/cache_policy.py",
+        "content": "DEFAULT_TTL_SECONDS = 300\n\n\ndef build_cache_key(tenant_id, user_id):\n    return f\"user:{user_id}\"\n"
+      }
+    ],
+    "current": [
+      {
+        "path": "src/cache_policy.py",
+        "content": "DEFAULT_TTL_SECONDS = 60\n\n\ndef build_cache_key(tenant_id, user_id):\n    return f\"tenant:{tenant_id}:user:{user_id}\"\n"
+      }
+    ]
+  }
+}

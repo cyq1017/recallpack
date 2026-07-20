@@ -1,0 +1,82 @@
+{
+  "project_id": "project-g-auth-mode",
+  "component": "provider_auth",
+  "fixture_structure": "source_backed_ai_provider_auth_header_mode",
+  "goal": "Update the provider auth helper to the current upstream header-mode policy.",
+  "allowed_edit_paths": ["src/provider_auth.py", "pyproject.toml"],
+  "initial_dependency_set": [],
+  "required_sources": ["session-g-fix:turn-006", "session-g-alpha:turn-004"],
+  "stale_sources": ["session-g-alpha:turn-002"],
+  "hidden_test_kind": "provider_auth_policy",
+  "hidden_tests": [
+    "test_standard_mode_strips_authorization",
+    "test_oauth_mode_uses_bearer_without_x_api_key",
+    "test_provider_auth_no_new_dependencies"
+  ],
+  "current_policy_terms": ["x-api-key", "strip caller authorization", "oauth code mode", "bearer"],
+  "baseline_downrank_phrases": [
+    "after the gateway incident",
+    "replace the old provider auth mode",
+    "hidden gateway tests fail",
+    "current handoff task",
+    "src/provider_auth.py currently"
+  ],
+  "baseline_embedding_terms": {
+    "primary": ["provider", "auth", "authentication", "authorization", "header", "headers", "x-api-key", "bearer", "upstream", "gateway"],
+    "secondary": ["standard", "mode", "mapping", "function", "build_upstream_headers"],
+    "current": ["strip", "oauth", "incident", "omit"]
+  },
+  "memory_events": {
+    "session-g-alpha:turn-002": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "provider_auth_policy",
+        "text": "Forward caller Authorization and also attach X-Api-Key for provider auth mode; the upstream should prefer the provider key.",
+        "scope_level": "component",
+        "component": "provider_auth"
+      }
+    },
+    "session-g-alpha:turn-004": {
+      "operation": "write",
+      "memory": {
+        "type": "preference",
+        "subject": "dependency_policy",
+        "text": "Do not add dependencies for provider auth header fixes.",
+        "scope_level": "project",
+        "component": null
+      }
+    },
+    "session-g-fix:turn-006": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "provider_auth_policy",
+        "text": "Standard provider-key mode must send only X-Api-Key and strip caller Authorization; OAuth code mode must send Authorization: Bearer and omit X-Api-Key.",
+        "scope_level": "component",
+        "component": "provider_auth"
+      },
+      "supersedes_candidates": [
+        {
+          "type": "decision",
+          "subject": "provider_auth_policy",
+          "component": "provider_auth"
+        }
+      ]
+    }
+  },
+  "patch_variants": {
+    "stale": [
+      {
+        "path": "src/provider_auth.py",
+        "content": "def build_upstream_headers(mode, inbound_headers, provider_token):\n    headers = dict(inbound_headers)\n    headers[\"Authorization\"] = inbound_headers.get(\"Authorization\", \"\")\n    headers[\"X-Api-Key\"] = provider_token\n    return headers\n"
+      }
+    ],
+    "current": [
+      {
+        "path": "src/provider_auth.py",
+        "content": "def build_upstream_headers(mode, inbound_headers, provider_token):\n    headers = {key: value for key, value in inbound_headers.items() if key.lower() != \"authorization\"}\n    if mode == \"oauth_code\":\n        headers[\"Authorization\"] = f\"Bearer {provider_token}\"\n        headers.pop(\"X-Api-Key\", None)\n        return headers\n    headers[\"X-Api-Key\"] = provider_token\n    headers.pop(\"Authorization\", None)\n    return headers\n"
+      }
+    ]
+  }
+}

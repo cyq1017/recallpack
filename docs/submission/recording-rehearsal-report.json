@@ -1,0 +1,67 @@
+{
+  "checks": [
+    {
+      "id": "run_of_show_anchors",
+      "status": "passed",
+      "summary": "2:20-2:45 timeline anchors present"
+    },
+    {
+      "id": "recording_claim_guardrails",
+      "status": "passed",
+      "summary": "baseline 1/3, RecallPack 3/3, Qwen, and ECS wording guarded"
+    },
+    {
+      "id": "readme_and_media_links",
+      "status": "passed",
+      "summary": "recording gate and packet are discoverable"
+    },
+    {
+      "id": "screenshot_assets",
+      "status": "passed",
+      "summary": "three 1280x720-class screenshots are staged"
+    },
+    {
+      "id": "manual_upload_gates",
+      "status": "passed",
+      "summary": "video upload, media order, and final submit remain gated"
+    },
+    {
+      "id": "public_ecs_boundary",
+      "status": "passed",
+      "summary": "recording keeps public ECS credential-free and M104 boundary verified"
+    },
+    {
+      "id": "submission_copy_consistency",
+      "status": "passed",
+      "summary": "submission/video copy keeps latest local package, M98 snapshot, and M104 ECS boundaries aligned"
+    }
+  ],
+  "fresh_m98_live_rerun_status": "live_e2e_failed",
+  "gated_actions": [
+    "devpost_submission",
+    "video_upload"
+  ],
+  "live_qwen_e2e_status": "live_e2e_passed",
+  "local_failures": [],
+  "manual_blockers": [
+    "final video URL or upload",
+    "final Devpost submit approval",
+    "final media order confirmation"
+  ],
+  "network_calls_made": false,
+  "no_public_action_performed": true,
+  "public_repo_url": "https://github.com/cyq1017/recallpack",
+  "recording_ready": true,
+  "requires_credentials": false,
+  "sanitized_bundle": "dist/recallpack-submission-20260720-231611",
+  "status": "ready_for_recording_gated_upload",
+  "video_candidate": {
+    "bytes": 3107552,
+    "devpost_video_url": null,
+    "duration_seconds": 156.0,
+    "manifest_path": "docs/submission/media/video-candidate/manifest.json",
+    "path": "docs/submission/media/video-candidate/recallpack-demo-candidate.mp4",
+    "status": "built",
+    "upload_performed": false
+  }
+}

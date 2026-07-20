@@ -1,0 +1,297 @@
+{
+  "actual_qwen_token_usage": {
+    "embedding_total_tokens": 534,
+    "rerank_total_tokens": 268
+  },
+  "candidate_count": 12,
+  "checks": {
+    "active_retry_selected": true,
+    "downstream_baseline_fails": false,
+    "project_preference_selected": false,
+    "stale_retry_selected": false
+  },
+  "credentials_recorded": false,
+  "deterministic_runtime_work": [
+    "cosine similarity over provider embeddings",
+    "top-N candidate selection",
+    "hidden-test execution against a temp repo"
+  ],
+  "downstream_causal_reason": "active retry policy selected: five attempts with exponential backoff and no dependency change",
+  "downstream_tests": {
+    "failed": 0,
+    "passed": 3
+  },
+  "embedding_top_n_sources": [
+    "session-a:turn-001",
+    "session-a:turn-005",
+    "session-a:turn-006",
+    "session-a:turn-007"
+  ],
+  "live_qwen_run": true,
+  "live_status": "live_embedding_baseline_failed",
+  "model_names": {
+    "embedding": "text-embedding-v4",
+    "rerank": "qwen3-rerank"
+  },
+  "project_id": "project-a",
+  "provider_traces": [
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 18,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "cd03bca6-d0de-99cb-ad37-2b4ce1ee43b3",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_query"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 39,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "af5c195d-7566-95b5-a9ba-dfcc8555f169",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 36,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "17c5bbe3-ba94-9556-a91f-92958f4162bd",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 36,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "5ecdc1ce-316f-9ebe-88b0-8044ec7e1f52",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 40,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "be3ccd23-d667-9476-b9e0-1cc9ce5b2858",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 46,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "60a4bd4b-fdd8-9c3a-8e51-7d7f0f548b26",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 38,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "c0d6bb5d-00d0-9161-a50a-b7bf49c8fbd7",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 41,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "2ee57d19-b227-9ffd-bf18-8980e0f34d17",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 35,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "fa16a91f-4708-9fdf-9f2a-606da37e2b9b",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 45,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "36cfc778-0e6f-9eae-90d6-48a5860defad",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 39,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "da76f5aa-61db-9e73-893e-e0671f966f1f",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 35,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "82907ae1-6dbc-9433-af6c-f02490b35cb3",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 41,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id": "8aa77b52-34e6-9906-aa20-8229155958d4",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 180,
+      "is_live": true,
+      "model_name": "qwen3-rerank",
+      "output_item_count": 4,
+      "provider_role": "rerank",
+      "request_id": "047b6c4b-18ae-90d6-acf2-383eb1115a39",
+      "request_id_present": true,
+      "request_purpose": "precision_rerank_active_memory_candidates"
+    }
+  ],
+  "ranked_sources": [
+    {
+      "rank_position": 1,
+      "similarity": 0.645066,
+      "source_ref": "session-a:turn-001"
+    },
+    {
+      "rank_position": 2,
+      "similarity": 0.624909,
+      "source_ref": "session-a:turn-005"
+    },
+    {
+      "rank_position": 3,
+      "similarity": 0.623466,
+      "source_ref": "session-a:turn-006"
+    },
+    {
+      "rank_position": 4,
+      "similarity": 0.580817,
+      "source_ref": "session-a:turn-007"
+    },
+    {
+      "rank_position": 5,
+      "similarity": 0.541593,
+      "source_ref": "session-a:turn-004"
+    },
+    {
+      "rank_position": 6,
+      "similarity": 0.504752,
+      "source_ref": "session-a:turn-012"
+    },
+    {
+      "rank_position": 7,
+      "similarity": 0.504571,
+      "source_ref": "session-a:turn-002"
+    },
+    {
+      "rank_position": 8,
+      "similarity": 0.469077,
+      "source_ref": "session-a:turn-010"
+    },
+    {
+      "rank_position": 9,
+      "similarity": 0.462985,
+      "source_ref": "session-a:turn-003"
+    },
+    {
+      "rank_position": 10,
+      "similarity": 0.461595,
+      "source_ref": "session-a:turn-011"
+    },
+    {
+      "rank_position": 11,
+      "similarity": 0.455482,
+      "source_ref": "session-a:turn-009"
+    },
+    {
+      "rank_position": 12,
+      "similarity": 0.451636,
+      "source_ref": "session-a:turn-008"
+    }
+  ],
+  "region_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "report_contains_raw_prompts": false,
+  "rerank_base_url": "https://dashscope.aliyuncs.com/compatible-api/v1",
+  "reranked_sources": [
+    {
+      "rerank_position": 1,
+      "source_ref": "session-a:turn-005"
+    },
+    {
+      "rerank_position": 2,
+      "source_ref": "session-a:turn-007"
+    },
+    {
+      "rerank_position": 3,
+      "source_ref": "session-a:turn-001"
+    },
+    {
+      "rerank_position": 4,
+      "source_ref": "session-a:turn-006"
+    }
+  ],
+  "retrieval_top_n": 4,
+  "scenario": "hero_real_embedding_raw_history_baseline",
+  "selected_sources": [
+    "session-a:turn-005",
+    "session-a:turn-007"
+  ],
+  "selection_top_k": 2
+}

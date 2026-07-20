@@ -1,0 +1,83 @@
+{
+  "project_id": "project-e",
+  "component": "pagination",
+  "fixture_structure": "non_isomorphic_multi_session_sparse_event_ids",
+  "goal": "Update the pagination helper to the current cursor limit policy.",
+  "allowed_edit_paths": ["src/pagination.py", "pyproject.toml"],
+  "initial_dependency_set": [],
+  "required_sources": ["session-e-gamma:decision-001", "session-e-beta:pref-002"],
+  "stale_sources": ["session-e-alpha:note-002"],
+  "hidden_test_kind": "pagination_policy",
+  "hidden_tests": [
+    "test_public_function_returns_mapping",
+    "test_uses_cursor_token",
+    "test_clamps_limit_to_100"
+  ],
+  "current_policy_terms": ["cursor tokens", "100"],
+  "baseline_downrank_phrases": [
+    "after api compatibility review",
+    "replace the old pagination plan",
+    "current handoff task",
+    "exposes build_page_request",
+    "existing pagination helper currently",
+    "return cursor and limit fields"
+  ],
+  "baseline_embedding_terms": {
+    "primary": ["pagination", "helper", "page numbers", "offset", "requests", "policy"],
+    "secondary": ["public", "function", "signature", "limit"],
+    "current": ["cursor", "tokens", "clamp", "100"]
+  },
+  "memory_events": {
+    "note-002": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "pagination_request_policy",
+        "text": "Use page numbers and offset-based pagination requests.",
+        "scope_level": "component",
+        "component": "pagination"
+      }
+    },
+    "pref-002": {
+      "operation": "write",
+      "memory": {
+        "type": "preference",
+        "subject": "pagination_public_api",
+        "text": "Keep build_page_request(cursor, limit) as the public function signature.",
+        "scope_level": "project",
+        "component": null
+      }
+    },
+    "decision-001": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "pagination_request_policy",
+        "text": "Use cursor tokens for pagination requests and clamp limit to 100.",
+        "scope_level": "component",
+        "component": "pagination"
+      },
+      "supersedes_candidates": [
+        {
+          "type": "decision",
+          "subject": "pagination_request_policy",
+          "component": "pagination"
+        }
+      ]
+    }
+  },
+  "patch_variants": {
+    "stale": [
+      {
+        "path": "src/pagination.py",
+        "content": "def build_page_request(page, page_size):\n    return {\"offset\": page * page_size, \"limit\": page_size}\n"
+      }
+    ],
+    "current": [
+      {
+        "path": "src/pagination.py",
+        "content": "def build_page_request(cursor, limit):\n    return {\"cursor\": cursor, \"limit\": min(limit, 100)}\n"
+      }
+    ]
+  }
+}

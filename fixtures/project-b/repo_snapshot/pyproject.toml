@@ -1,0 +1,4 @@
+[project]
+name = "project-b"
+version = "0.1.0"
+dependencies = []

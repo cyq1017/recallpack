@@ -1,0 +1,28 @@
+{
+  "record_type": "scenario_provenance",
+  "scenario_slot": "graphiti",
+  "evidence_class": "source_backed_synthetic",
+  "production_trace": false,
+  "copied_source_text": false,
+  "authored_summaries": true,
+  "repository_url": "https://github.com/getzep/graphiti",
+  "source_urls": [
+    "https://github.com/getzep/graphiti/blob/c537ed49532f0a41019136f4470e24df1abc28e2/AGENTS.md",
+    "https://github.com/getzep/graphiti/commit/57778eb5bff2231a53d6ccbc8dc6e386c47b1f11",
+    "https://github.com/getzep/graphiti/blob/57778eb5bff2231a53d6ccbc8dc6e386c47b1f11/AGENTS.md",
+    "https://github.com/getzep/graphiti/blob/57778eb5bff2231a53d6ccbc8dc6e386c47b1f11/LICENSE"
+  ],
+  "commit_refs": [
+    "c537ed49532f0a41019136f4470e24df1abc28e2",
+    "57778eb5bff2231a53d6ccbc8dc6e386c47b1f11"
+  ],
+  "license_id": "Apache-2.0",
+  "license_status": "verified_from_repository_license",
+  "review_status": "pending_independent_evidence_review",
+  "limitations": [
+    "The event stream is an authored summary, not a production trace.",
+    "The policy transition in turns 001 and 002 is source-backed; the compatibility reminder and handoff task in turns 003 and 004 are authored evaluation setup.",
+    "The packet demonstrates a policy-evolution shape, not incident frequency.",
+    "No source text or repository code is copied into the scenario."
+  ]
+}

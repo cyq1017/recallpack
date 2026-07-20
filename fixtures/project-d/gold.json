@@ -1,0 +1,80 @@
+{
+  "project_id": "project-d",
+  "component": "serializer",
+  "goal": "Update the audit serializer to the current redaction policy.",
+  "allowed_edit_paths": ["src/audit_serializer.py", "pyproject.toml"],
+  "initial_dependency_set": [],
+  "required_sources": ["session-d:turn-005", "session-d:turn-003"],
+  "stale_sources": ["session-d:turn-001"],
+  "hidden_test_kind": "serializer_redaction",
+  "hidden_tests": [
+    "test_redacts_email",
+    "test_removes_raw_email",
+    "test_preserves_event_type"
+  ],
+  "current_policy_terms": ["redact", "[redacted]"],
+  "baseline_downrank_phrases": [
+    "after privacy review",
+    "privacy review found",
+    "current handoff task",
+    "replaces the earlier"
+  ],
+  "baseline_embedding_terms": {
+    "primary": ["audit", "serializer", "email", "payload", "raw email"],
+    "secondary": ["public", "function", "event type"],
+    "current": ["redact", "[redacted]", "privacy"]
+  },
+  "memory_events": {
+    "turn-001": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "audit_email_policy",
+        "text": "Keep raw email values in user event payloads.",
+        "scope_level": "component",
+        "component": "serializer"
+      }
+    },
+    "turn-003": {
+      "operation": "write",
+      "memory": {
+        "type": "preference",
+        "subject": "serializer_public_api",
+        "text": "Keep serialize_user_event as the public function name.",
+        "scope_level": "project",
+        "component": null
+      }
+    },
+    "turn-005": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "audit_email_policy",
+        "text": "Redact user email values as [redacted] in serialized audit events.",
+        "scope_level": "component",
+        "component": "serializer"
+      },
+      "supersedes_candidates": [
+        {
+          "type": "decision",
+          "subject": "audit_email_policy",
+          "component": "serializer"
+        }
+      ]
+    }
+  },
+  "patch_variants": {
+    "stale": [
+      {
+        "path": "src/audit_serializer.py",
+        "content": "def serialize_user_event(event):\n    return dict(event)\n"
+      }
+    ],
+    "current": [
+      {
+        "path": "src/audit_serializer.py",
+        "content": "def serialize_user_event(event):\n    payload = dict(event)\n    if \"email\" in payload:\n        payload[\"email\"] = '[redacted]'\n    return payload\n"
+      }
+    ]
+  }
+}

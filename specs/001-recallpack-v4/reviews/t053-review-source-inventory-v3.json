@@ -1,0 +1,59 @@
+{
+  "record_type": "review_source_inventory_v3",
+  "semantic_rules_version": "4.1",
+  "source_bytes_custody": "reviewer_only_external_package",
+  "sources": [
+    {
+      "source_id": "projectodyssey-old-policy",
+      "repository_url": "https://github.com/HomericIntelligence/Odyssey",
+      "commit": "47d9ddc0e8cfdb102ffda04dc5f932e0c2351d15",
+      "path": "docs/dev/mojo-jit-crash-workaround.md",
+      "raw_url": "https://raw.githubusercontent.com/HomericIntelligence/Odyssey/47d9ddc0e8cfdb102ffda04dc5f932e0c2351d15/docs/dev/mojo-jit-crash-workaround.md",
+      "sha256": "e88c707aefb95ae6a83e1b272d02823e9845e0581356cef0a8bbfaf57aaed24e",
+      "bytes": 4092,
+      "commit_author_time": "2026-03-07T22:39:38Z",
+      "commit_committer_time": "2026-03-09T08:53:33Z",
+      "license_id": "BSD-3-Clause",
+      "reviewer_filename": "projectodyssey-old-policy.md"
+    },
+    {
+      "source_id": "projectodyssey-new-policy",
+      "repository_url": "https://github.com/HomericIntelligence/Odyssey",
+      "commit": "147b1517e47809a78bb63b242f8578b553cc577d",
+      "path": "CLAUDE.md",
+      "raw_url": "https://raw.githubusercontent.com/HomericIntelligence/Odyssey/147b1517e47809a78bb63b242f8578b553cc577d/CLAUDE.md",
+      "sha256": "b19d281af3809453fc032ead2742a401ad8dd386185fd88d822ed888446fa501",
+      "bytes": 42004,
+      "commit_author_time": "2026-07-13T05:15:42Z",
+      "commit_committer_time": "2026-07-13T05:15:42Z",
+      "license_id": "BSD-3-Clause",
+      "reviewer_filename": "projectodyssey-new-policy.md"
+    },
+    {
+      "source_id": "deepagents-old-package-policy",
+      "repository_url": "https://github.com/langchain-ai/deepagents",
+      "commit": "18bf86d5fcb9245af9aed1fefe5d80b2200f9cfc",
+      "path": "AGENTS.md",
+      "raw_url": "https://raw.githubusercontent.com/langchain-ai/deepagents/18bf86d5fcb9245af9aed1fefe5d80b2200f9cfc/AGENTS.md",
+      "sha256": "16138101310b068b3f73c4645463d1f4e215468bda19354e8618b6d9aca02290",
+      "bytes": 24000,
+      "commit_author_time": "2026-05-16T00:18:34Z",
+      "commit_committer_time": "2026-05-16T00:18:34Z",
+      "license_id": "MIT",
+      "reviewer_filename": "deepagents-old-package-policy.md"
+    },
+    {
+      "source_id": "deepagents-new-package-policy",
+      "repository_url": "https://github.com/langchain-ai/deepagents",
+      "commit": "c7b311933da6245267f4bded050c36279973de1e",
+      "path": "AGENTS.md",
+      "raw_url": "https://raw.githubusercontent.com/langchain-ai/deepagents/c7b311933da6245267f4bded050c36279973de1e/AGENTS.md",
+      "sha256": "757fd2d6c0febe137abdd96c6d6256558c479bfbff24c9e0bd3614e6dfd7dffe",
+      "bytes": 25811,
+      "commit_author_time": "2026-05-16T01:28:14Z",
+      "commit_committer_time": "2026-05-16T01:28:14Z",
+      "license_id": "MIT",
+      "reviewer_filename": "deepagents-new-package-policy.md"
+    }
+  ]
+}

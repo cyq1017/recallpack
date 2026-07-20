@@ -1,0 +1,126 @@
+{
+  "actual_qwen_token_usage": {
+    "embedding_total_tokens": 65,
+    "rerank_total_tokens": 9
+  },
+  "checks": {
+    "active_retry_not_selected_by_baseline": true,
+    "downstream_baseline_fails": true,
+    "real_embedding_endpoint_contract_ready": true,
+    "real_rerank_endpoint_contract_ready": true,
+    "stale_retry_selected_by_real_embedding_path": true
+  },
+  "embedding_request_contract": {
+    "all_single_text_input": true,
+    "all_text_embedding_v4": true,
+    "document_request_count": 12,
+    "query_request_count": 1,
+    "request_count": 13
+  },
+  "expected_downstream_tests": "1/3",
+  "expected_selected_sources": [
+    "session-a:turn-001",
+    "session-a:turn-003"
+  ],
+  "live_qwen_run": false,
+  "model_names": {
+    "embedding": "text-embedding-v4",
+    "rerank": "qwen3-rerank"
+  },
+  "network_calls_made": false,
+  "next_gated_action": "Rerun live Qwen embedding baseline only after explicit approval; preflight does not read credentials or call Qwen.",
+  "preflight_status": "ready_for_live_embedding_baseline_rerun",
+  "ranked_sources": [
+    {
+      "rank_position": 1,
+      "similarity": 1.0,
+      "source_ref": "session-a:turn-001"
+    },
+    {
+      "rank_position": 2,
+      "similarity": 0.998618,
+      "source_ref": "session-a:turn-003"
+    },
+    {
+      "rank_position": 3,
+      "similarity": 0.267644,
+      "source_ref": "session-a:turn-005"
+    },
+    {
+      "rank_position": 4,
+      "similarity": 0.0,
+      "source_ref": "session-a:turn-002"
+    },
+    {
+      "rank_position": 5,
+      "similarity": 0.0,
+      "source_ref": "session-a:turn-004"
+    },
+    {
+      "rank_position": 6,
+      "similarity": 0.0,
+      "source_ref": "session-a:turn-006"
+    },
+    {
+      "rank_position": 7,
+      "similarity": 0.0,
+      "source_ref": "session-a:turn-007"
+    },
+    {
+      "rank_position": 8,
+      "similarity": 0.0,
+      "source_ref": "session-a:turn-008"
+    },
+    {
+      "rank_position": 9,
+      "similarity": 0.0,
+      "source_ref": "session-a:turn-009"
+    },
+    {
+      "rank_position": 10,
+      "similarity": 0.0,
+      "source_ref": "session-a:turn-010"
+    },
+    {
+      "rank_position": 11,
+      "similarity": 0.0,
+      "source_ref": "session-a:turn-011"
+    },
+    {
+      "rank_position": 12,
+      "similarity": 0.0,
+      "source_ref": "session-a:turn-012"
+    }
+  ],
+  "request_role_counts": {
+    "embedding": 13,
+    "rerank": 1
+  },
+  "rerank_request_contract": {
+    "all_instruct_present": true,
+    "all_qwen3_rerank": true,
+    "all_top_n_matches_document_count": true,
+    "request_count": 1
+  },
+  "reranked_sources": [
+    {
+      "rerank_position": 1,
+      "source_ref": "session-a:turn-001"
+    },
+    {
+      "rerank_position": 2,
+      "source_ref": "session-a:turn-003"
+    },
+    {
+      "rerank_position": 3,
+      "source_ref": "session-a:turn-005"
+    },
+    {
+      "rerank_position": 4,
+      "source_ref": "session-a:turn-002"
+    }
+  ],
+  "retrieval_top_n": 4,
+  "scenario": "hero_real_embedding_raw_history_baseline_preflight",
+  "selection_top_k": 2
+}

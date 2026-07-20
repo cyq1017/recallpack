@@ -1,0 +1,172 @@
+{
+  "record_type": "semantic_adjudication_vectors_v4",
+  "semantic_rules_version": "4.1",
+  "canonicalization": "RFC8785",
+  "decision_domain": ["pass", "reject"],
+  "vectors": [
+    {
+      "case_id": "A1",
+      "expected_decision": "reject",
+      "model_visible_events": [
+        {"source_ref": "vector:a1:001", "summary": "relation_kind=true_supersession prior_source_ref=turn-001 candidate_source_ref=turn-002"}
+      ],
+      "prompt_fragments": [],
+      "reviewer_only_source_statements": [],
+      "provider_output": null,
+      "rationale": "Direct scorer field names, relation kind, and endpoint pairing are model-visible."
+    },
+    {
+      "case_id": "A2",
+      "expected_decision": "reject",
+      "model_visible_events": [
+        {"source_ref": "vector:a2:001", "summary": "Treat turn-001 as the prior endpoint and turn-002 as its replacement."}
+      ],
+      "prompt_fragments": [],
+      "reviewer_only_source_statements": [],
+      "provider_output": null,
+      "rationale": "Paraphrased endpoint roles and pairing expose scorer authority."
+    },
+    {
+      "case_id": "A3",
+      "expected_decision": "reject",
+      "model_visible_events": [
+        {"source_ref": "vector:a3:001", "summary": "This project instruction is obsolete."},
+        {"source_ref": "vector:a3:002", "summary": "This is the authoritative project instruction."}
+      ],
+      "prompt_fragments": [],
+      "reviewer_only_source_statements": [],
+      "provider_output": null,
+      "rationale": "Benchmark-authored stale and active roles are explicit across two events."
+    },
+    {
+      "case_id": "A4",
+      "expected_decision": "reject",
+      "model_visible_events": [
+        {"source_ref": "vector:a4:001", "summary": "Use the first retry policy for historical comparison."},
+        {"source_ref": "vector:a4:002", "summary": "Use the second retry policy when implementing the handoff."}
+      ],
+      "prompt_fragments": ["Compare the paired policies, but act only on the implementation policy."],
+      "reviewer_only_source_statements": [],
+      "provider_output": null,
+      "rationale": "Distributed event and prompt fragments jointly assign endpoint pairing and action authority."
+    },
+    {
+      "case_id": "A5",
+      "expected_decision": "reject",
+      "model_visible_events": [
+        {"source_ref": "vector:a5:001", "summary": "Retry the cache rebuild three times with a fixed 100 ms delay."},
+        {"source_ref": "vector:a5:002", "summary": "Do not retry the cache rebuild three times with a fixed 100 ms delay."}
+      ],
+      "prompt_fragments": [],
+      "reviewer_only_source_statements": [
+        "The second source record discusses backoff behavior without the first event's three-attempt or 100 ms vocabulary."
+      ],
+      "provider_output": null,
+      "rationale": "The second benchmark summary mirrors the first event's complete action vocabulary without source support."
+    },
+    {
+      "case_id": "A6",
+      "expected_decision": "reject",
+      "model_visible_events": [],
+      "prompt_fragments": ["Required source: turn-002. Hidden assertion: retries == 0. Expected patch must delete retry_loop()."],
+      "reviewer_only_source_statements": [],
+      "provider_output": null,
+      "rationale": "Gold source selection, hidden predicate, and expected patch behavior are exposed."
+    },
+    {
+      "case_id": "A7",
+      "expected_decision": "reject",
+      "model_visible_events": [
+        {"source_ref": "vector:a7:001", "summary": "Synthetic source sentence used only by this adjudication vector."}
+      ],
+      "prompt_fragments": [],
+      "reviewer_only_source_statements": [
+        "Synthetic source sentence used only by this adjudication vector."
+      ],
+      "provider_output": null,
+      "rationale": "The model-visible summary is an exact copy of the reviewer-only source sentence."
+    },
+    {
+      "case_id": "P1",
+      "expected_decision": "pass",
+      "model_visible_events": [
+        {"source_ref": "vector:p1:001", "observed_at": "2026-01-01T00:00:00Z", "summary": "The project uses bounded retries."}
+      ],
+      "prompt_fragments": [],
+      "reviewer_only_source_statements": ["Bounded retry behavior is part of project policy."],
+      "provider_output": null,
+      "rationale": "A source reference and independently derived timestamp are task provenance, not scorer authority."
+    },
+    {
+      "case_id": "P2",
+      "expected_decision": "pass",
+      "model_visible_events": [
+        {"source_ref": "vector:p2:001", "summary": "The build retries compiler crashes once."},
+        {"source_ref": "vector:p2:002", "summary": "Compiler crashes require a reproducer and a code fix."}
+      ],
+      "prompt_fragments": [],
+      "reviewer_only_source_statements": [
+        "The build pipeline reruns a compiler failure once.",
+        "A crashing compiler should be reduced to a reproducer and repaired."
+      ],
+      "provider_output": null,
+      "rationale": "The semantic conflict appears only after comparing two independently source-supported statements."
+    },
+    {
+      "case_id": "P3",
+      "expected_decision": "pass",
+      "model_visible_events": [
+        {"source_ref": "vector:p3:001", "observed_at": "2026-01-01T00:00:00Z", "summary": "The service uses fixed-delay retries."},
+        {"source_ref": "vector:p3:002", "observed_at": "2026-02-01T00:00:00Z", "summary": "The service uses exponential backoff."}
+      ],
+      "prompt_fragments": [],
+      "reviewer_only_source_statements": [
+        "Retry scheduling uses a constant delay.",
+        "Retry scheduling increases the delay between attempts."
+      ],
+      "provider_output": null,
+      "rationale": "Chronology comes from independently verified source timestamps and no role cue was authored."
+    },
+    {
+      "case_id": "P4",
+      "expected_decision": "pass",
+      "model_visible_events": [
+        {"source_ref": "vector:p4:001", "summary": "Interactive slash commands are implemented in the code package."},
+        {"source_ref": "vector:p4:002", "summary": "Deployment commands are implemented in the CLI package."}
+      ],
+      "prompt_fragments": [],
+      "reviewer_only_source_statements": [
+        "Slash-command implementation lives with interactive coding features in the code package.",
+        "The command-line package owns deploy-oriented commands."
+      ],
+      "provider_output": null,
+      "rationale": "The independently supported responsibilities coexist without an authored independence label."
+    },
+    {
+      "case_id": "P5",
+      "expected_decision": "pass",
+      "model_visible_events": [
+        {"source_ref": "vector:p5:001", "summary": "Handoff task: add a /context command without adding dependencies."}
+      ],
+      "prompt_fragments": [],
+      "reviewer_only_source_statements": [],
+      "provider_output": null,
+      "rationale": "The task names a feature and neutral constraint without selecting memory, endpoints, or expected output."
+    },
+    {
+      "case_id": "P6",
+      "expected_decision": "pass",
+      "model_visible_events": [
+        {"source_ref": "vector:p6:001", "observed_at": "2026-01-01T00:00:00Z", "summary": "The worker retries network timeouts twice."},
+        {"source_ref": "vector:p6:002", "observed_at": "2026-02-01T00:00:00Z", "summary": "The worker uses exponential backoff for network timeouts."}
+      ],
+      "prompt_fragments": ["Extract project memories from the supplied events."],
+      "reviewer_only_source_statements": [
+        "Network timeout handling permits two repeat attempts.",
+        "Delay intervals grow between attempts after a network timeout."
+      ],
+      "provider_output": {"inferred_relation": "the newer policy changes the retry behavior"},
+      "rationale": "The provider inference is downstream output; no scorer authority was present in its input."
+    }
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "actual_qwen_token_usage": {
+    "embedding_total_tokens": 108,
+    "memory_decision_total_tokens": 22297,
+    "patch_generation_total_tokens": 1465,
+    "rerank_total_tokens": 205
+  },
+  "checks": {
+    "active_retry_selected": true,
+    "all_observe_events_completed": true,
+    "baseline_downstream_fails": true,
+    "compile_status_ok": true,
+    "project_preference_selected": true,
+    "recallpack_downstream_passes": true,
+    "stale_retry_excluded": true
+  },
+  "compile_trace": {
+    "candidate_count": 3,
+    "embedding_top_n_count": 3,
+    "omitted_memory_ids": [],
+    "retrieval_mode": "embedding_top_n",
+    "retrieved_memory_ids": [
+      "mem_c1c7f9c146d641d3852903d6afcc46b3",
+      "mem_d9cf01d2768d4923b1432c05a9086c9e",
+      "mem_4d775acb3e4e434eb15efe0012654c34"
+    ],
+    "selected_count": 3
+  },
+  "deterministic_runtime_work": [
+    "event ordering and lease fencing",
+    "SQLite lifecycle writes and supersession edges",
+    "active/superseded lifecycle filtering",
+    "cosine similarity over provider embeddings",
+    "512-token budget selection"
+  ],
+  "downstream_patch_generation": {
+    "baseline": {
+      "accepted": true,
+      "execution_mode": "temp_repo_hidden_tests",
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "provider_role": "patch_generation",
+      "request_purpose": "generate_patch_from_goal_and_selected_context",
+      "summary": {
+        "failed": 2,
+        "passed": 1
+      }
+    },
+    "recallpack": {
+      "accepted": true,
+      "execution_mode": "temp_repo_hidden_tests",
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "provider_role": "patch_generation",
+      "request_purpose": "generate_patch_from_goal_and_selected_context",
+      "summary": {
+        "failed": 0,
+        "passed": 3
+      }
+    },
+    "same_provider_contract": true,
+    "used_gold_patch_variants": false
+  },
+  "excluded_sources_checked": [
+    "session-a:turn-001"
+  ],
+  "live_qwen_run": true,
+  "live_status": "live_e2e_passed",
+  "observe_status_counts": {
+    "200": 12
+  },
+  "observed_event_count": 12,
+  "pack_memory_segment_tokens": 173,
+  "project_id": "project-a",
+  "provider_traces": [
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 686,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 2,
+      "input_token_estimate": 781,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 2,
+      "input_token_estimate": 781,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 3,
+      "input_token_estimate": 877,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 989,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 981,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 984,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 978,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 988,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 983,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 5,
+      "input_token_estimate": 1077,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 6,
+      "input_token_estimate": 1178,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "memory_decision",
+      "request_id_present": true,
+      "request_purpose": "extract_classify_and_judge_memory_lifecycle"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 18,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_query"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 32,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 42,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 1,
+      "input_token_estimate": 25,
+      "is_live": true,
+      "model_name": "text-embedding-v4",
+      "output_item_count": 1,
+      "provider_role": "embedding",
+      "request_id_present": true,
+      "request_purpose": "candidate_memory_retrieval_document"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 3,
+      "input_token_estimate": 116,
+      "is_live": true,
+      "model_name": "qwen3-rerank",
+      "output_item_count": 3,
+      "provider_role": "rerank",
+      "request_id_present": true,
+      "request_purpose": "precision_rerank_active_memory_candidates"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 3,
+      "input_token_estimate": 31,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "patch_generation",
+      "request_id_present": true,
+      "request_purpose": "generate_patch_from_goal_and_selected_context"
+    },
+    {
+      "deterministic_fallback_status": "live_qwen",
+      "input_item_count": 4,
+      "input_token_estimate": 43,
+      "is_live": true,
+      "model_name": "qwen3.7-plus-2026-05-26",
+      "output_item_count": 1,
+      "provider_role": "patch_generation",
+      "request_id_present": true,
+      "request_purpose": "generate_patch_from_goal_and_selected_context"
+    }
+  ],
+  "qwen_model_work": [
+    "memory extraction, type classification, and supersession judgment",
+    "candidate memory retrieval with text-embedding-v4",
+    "precision reranking with qwen3-rerank"
+  ],
+  "region_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "rerank_base_url": "https://dashscope.aliyuncs.com/compatible-api/v1",
+  "scenario": "hero_observe_compile",
+  "selected_sources": [
+    "session-a:turn-005",
+    "session-a:turn-004",
+    "session-a:turn-003"
+  ]
+}

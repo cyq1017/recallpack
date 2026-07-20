@@ -1,0 +1,9 @@
+{
+  "record_type": "relation_label_ledger",
+  "scenario_slot": "graphiti",
+  "source_ledger_sha256": "b896a1260ab498b5d5bc24402293d09f73e2ea8624dc885950c865ab79a0d3ae",
+  "entries": [
+    {"opportunity_id": "opp_graphiti_true_1", "prior_source_ref": "graphiti:turn-001", "candidate_source_ref": "graphiti:turn-002", "relation_kind": "true_supersession"},
+    {"opportunity_id": "opp_graphiti_hard_1", "prior_source_ref": "graphiti:turn-002", "candidate_source_ref": "graphiti:turn-003", "relation_kind": "hard_negative"}
+  ]
+}

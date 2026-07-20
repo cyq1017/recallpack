@@ -1,0 +1,26 @@
+{
+  "record_type": "scenario_provenance",
+  "scenario_slot": "projectodyssey",
+  "evidence_class": "source_backed_synthetic",
+  "production_trace": false,
+  "copied_source_text": false,
+  "authored_summaries": true,
+  "repository_url": "https://github.com/HomericIntelligence/Odyssey",
+  "source_urls": [
+    "https://github.com/HomericIntelligence/Odyssey/blob/47d9ddc0e8cfdb102ffda04dc5f932e0c2351d15/docs/dev/mojo-jit-crash-workaround.md",
+    "https://github.com/HomericIntelligence/Odyssey/blob/147b1517e47809a78bb63b242f8578b553cc577d/CLAUDE.md",
+    "https://github.com/HomericIntelligence/Odyssey/blob/147b1517e47809a78bb63b242f8578b553cc577d/LICENSE"
+  ],
+  "commit_refs": [
+    "47d9ddc0e8cfdb102ffda04dc5f932e0c2351d15",
+    "147b1517e47809a78bb63b242f8578b553cc577d"
+  ],
+  "license_id": "BSD-3-Clause",
+  "license_status": "verified_from_repository_license",
+  "review_status": "pending_independent_evidence_review",
+  "limitations": [
+    "The event stream is an authored summary, not a production trace.",
+    "The policy transition in turns 001 and 002 is source-backed; the dependency constraint and handoff task in turns 003 and 004 are neutral authored evaluation setup.",
+    "The packet does not claim RecallPack fixed Odyssey, and no repository text or code is copied."
+  ]
+}

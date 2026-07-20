@@ -1,0 +1,13 @@
+{
+  "project_id": "project-i-deepagents-package",
+  "component": "package_policy",
+  "fixture_structure": "source_backed_deepagents_package_relocation",
+  "allowed_edit_paths": ["src/package_policy.py", "pyproject.toml"],
+  "initial_dependency_set": [],
+  "hidden_test_kind": "package_relocation_policy",
+  "hidden_tests": [
+    "test_interactive_context_command_uses_code_package",
+    "test_startup_tip_uses_code_package",
+    "test_deployment_command_stays_in_cli_package"
+  ]
+}

@@ -1,0 +1,4 @@
+[project]
+name = "project-j-graphiti-backend"
+version = "0.1.0"
+dependencies = []

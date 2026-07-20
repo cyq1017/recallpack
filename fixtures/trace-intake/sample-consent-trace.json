@@ -1,0 +1,62 @@
+{
+  "trace_id": "sample-consent-trace-001",
+  "project_id": "candidate-real-trace",
+  "source_kind": "consented_sanitized_trace_dry_run",
+  "promoted_to_submission_evidence": false,
+  "consent": {
+    "status": "consented",
+    "scope": "sanitized_recallpack_trace_review",
+    "allows_public_release": false,
+    "participant_label": "developer-a"
+  },
+  "events": [
+    {
+      "session_id": "session-real-a",
+      "sequence_no": 1,
+      "actor": "user",
+      "observed_at": "2026-07-08T09:00:00Z",
+      "component": "provider_auth",
+      "text": "Initial handoff says standard provider auth should forward caller Authorization while also adding X-Api-Key."
+    },
+    {
+      "session_id": "session-real-a",
+      "sequence_no": 2,
+      "actor": "assistant",
+      "observed_at": "2026-07-08T09:01:00Z",
+      "component": "provider_auth",
+      "text": "Remembered decision: standard provider auth forwards caller Authorization and adds X-Api-Key."
+    },
+    {
+      "session_id": "session-real-a",
+      "sequence_no": 3,
+      "actor": "user",
+      "observed_at": "2026-07-08T09:02:00Z",
+      "component": "provider_auth",
+      "text": "After gateway testing, replace that policy: standard provider auth strips caller Authorization and sends only X-Api-Key."
+    },
+    {
+      "session_id": "session-real-a",
+      "sequence_no": 4,
+      "actor": "assistant",
+      "observed_at": "2026-07-08T09:03:00Z",
+      "component": "provider_auth",
+      "text": "Superseded the old provider auth memory with the active standard-mode X-Api-Key policy."
+    },
+    {
+      "session_id": "session-real-a",
+      "sequence_no": 5,
+      "actor": "user",
+      "observed_at": "2026-07-08T09:04:00Z",
+      "component": "provider_auth",
+      "text": "Keep OAuth code mode separate: it must use Authorization Bearer and must not send X-Api-Key."
+    },
+    {
+      "session_id": "session-real-a",
+      "sequence_no": 6,
+      "actor": "user",
+      "observed_at": "2026-07-08T09:05:00Z",
+      "component": "project",
+      "text": "Do not add dependencies for this auth-header fix."
+    }
+  ]
+}

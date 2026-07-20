@@ -1,0 +1,75 @@
+{
+  "project_id": "project-b",
+  "component": "config",
+  "goal": "Update the config loader to follow the current missing-key policy.",
+  "allowed_edit_paths": ["src/config_loader.py", "pyproject.toml"],
+  "initial_dependency_set": [],
+  "required_sources": ["session-b:turn-005", "session-b:turn-003"],
+  "stale_sources": ["session-b:turn-001"],
+  "hidden_test_kind": "config_loader",
+  "hidden_tests": [
+    "test_raises_config_error",
+    "test_error_mentions_missing_key",
+    "test_public_function_returns_existing_value"
+  ],
+  "current_policy_terms": ["configerror", "missing key"],
+  "baseline_downrank_phrases": ["after the silent config bug"],
+  "baseline_embedding_terms": {
+    "primary": ["config", "loader", "missing", "key", "policy", "return none"],
+    "secondary": ["public", "function", "project"],
+    "current": ["configerror", "raise"]
+  },
+  "memory_events": {
+    "turn-001": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "config_missing_policy",
+        "text": "Return None when a config key is missing.",
+        "scope_level": "component",
+        "component": "config"
+      }
+    },
+    "turn-003": {
+      "operation": "write",
+      "memory": {
+        "type": "preference",
+        "subject": "config_public_api",
+        "text": "Keep get_required_config as the public function name.",
+        "scope_level": "project",
+        "component": null
+      }
+    },
+    "turn-005": {
+      "operation": "write",
+      "memory": {
+        "type": "decision",
+        "subject": "config_missing_policy",
+        "text": "Raise ConfigError and include the missing key name when a config key is absent.",
+        "scope_level": "component",
+        "component": "config"
+      },
+      "supersedes_candidates": [
+        {
+          "type": "decision",
+          "subject": "config_missing_policy",
+          "component": "config"
+        }
+      ]
+    }
+  },
+  "patch_variants": {
+    "stale": [
+      {
+        "path": "src/config_loader.py",
+        "content": "def get_required_config(config, key):\n    return config.get(key)\n"
+      }
+    ],
+    "current": [
+      {
+        "path": "src/config_loader.py",
+        "content": "class ConfigError(RuntimeError):\n    pass\n\n\ndef get_required_config(config, key):\n    try:\n        return config[key]\n    except KeyError as exc:\n        raise ConfigError(f\"missing config key: {key}\") from exc\n"
+      }
+    ]
+  }
+}

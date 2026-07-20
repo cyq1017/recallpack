@@ -1,0 +1,241 @@
+openapi: 3.1.0
+info:
+  title: RecallPack Observe Contract
+  version: 4.0.0
+paths:
+  /observe:
+    post:
+      operationId: observeProjectEvent
+      summary: Observe one ordered project session event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObserveRequest'
+      responses:
+        '200':
+          description: Completed event, terminal no-op, or idempotent replay
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObserveCompletedResponse'
+        '202':
+          description: Identical event is already owned by an unexpired attempt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservePendingResponse'
+        '400':
+          description: Malformed request or invalid timezone-aware timestamp
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Ordering, idempotency, or lease conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictResponse'
+        '503':
+          description: Retryable provider, network, storage, or operator-action failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryableResponse'
+components:
+  schemas:
+    ObserveRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - project_id
+        - session_id
+        - event_id
+        - sequence_no
+        - actor
+        - kind
+        - observed_at
+        - text
+      properties:
+        project_id:
+          type: string
+          minLength: 1
+          maxLength: 128
+        session_id:
+          type: string
+          minLength: 1
+          maxLength: 128
+        event_id:
+          type: string
+          minLength: 1
+          maxLength: 128
+        sequence_no:
+          type: integer
+          minimum: 1
+        actor:
+          type: string
+          enum: [user, assistant, tool]
+        kind:
+          type: string
+          enum: [message, test_result, command_result]
+        observed_at:
+          type: string
+          format: date-time
+          description: Timezone-aware; canonicalized to UTC before hashing
+        text:
+          type: string
+          minLength: 1
+          maxLength: 20000
+    ObserveCompletedResponse:
+      type: object
+      additionalProperties: false
+      required: [status_code, state, replayed, event, final_result, trace]
+      properties:
+        status_code:
+          const: 200
+        state:
+          const: completed
+        replayed:
+          type: boolean
+        event:
+          $ref: '#/components/schemas/EventRef'
+        final_result:
+          oneOf:
+            - $ref: '#/components/schemas/NoOpResult'
+            - $ref: '#/components/schemas/DuplicateResult'
+            - $ref: '#/components/schemas/WriteResult'
+          discriminator:
+            propertyName: operation
+        trace:
+          $ref: '#/components/schemas/ObserveTraceSummary'
+    ObservePendingResponse:
+      type: object
+      additionalProperties: false
+      required: [status_code, state, event]
+      properties:
+        status_code:
+          const: 202
+        state:
+          const: pending
+        event:
+          $ref: '#/components/schemas/EventRef'
+    EventRef:
+      type: object
+      additionalProperties: false
+      required: [project_id, session_id, event_id, sequence_no, project_event_seq]
+      properties:
+        project_id: {type: string}
+        session_id: {type: string}
+        event_id: {type: string}
+        sequence_no: {type: integer, minimum: 1}
+        project_event_seq: {type: integer, minimum: 1}
+    NoOpResult:
+      type: object
+      additionalProperties: false
+      required: [operation, reason, memory]
+      properties:
+        operation: {const: no_op}
+        reason: {type: string, minLength: 1}
+        memory: {type: 'null'}
+    DuplicateResult:
+      type: object
+      additionalProperties: false
+      required: [operation, reason, memory, duplicate_of_memory_id]
+      properties:
+        operation: {const: duplicate}
+        reason: {type: string, minLength: 1}
+        memory: {type: 'null'}
+        duplicate_of_memory_id: {type: string, minLength: 1}
+    WriteResult:
+      type: object
+      additionalProperties: false
+      required: [operation, reason, memory, superseded_memory_ids]
+      properties:
+        operation: {const: write}
+        reason: {type: string, minLength: 1}
+        memory:
+          $ref: '#/components/schemas/MemorySummary'
+        superseded_memory_ids:
+          type: array
+          uniqueItems: true
+          items: {type: string, minLength: 1}
+    MemorySummary:
+      type: object
+      additionalProperties: false
+      required: [id, type, subject, text, scope_level, component, source_ref]
+      properties:
+        id: {type: string, minLength: 1}
+        type: {type: string, enum: [decision, preference, lesson]}
+        subject: {type: string, minLength: 1}
+        text: {type: string, minLength: 1}
+        scope_level: {type: string, enum: [project, component]}
+        component:
+          type: [string, 'null']
+        source_ref:
+          type: object
+          additionalProperties: false
+          required: [session_id, event_id]
+          properties:
+            session_id: {type: string}
+            event_id: {type: string}
+    ObserveTraceSummary:
+      type: object
+      additionalProperties: false
+      required: [run_id, attempt_no, provider_mode, repaired, request_id_present]
+      properties:
+        run_id: {type: string}
+        attempt_no: {type: integer, minimum: 1}
+        provider_mode: {type: string, enum: [fake, live]}
+        repaired: {type: boolean}
+        request_id_present: {type: boolean}
+    ConflictResponse:
+      type: object
+      additionalProperties: false
+      required: [status_code, error]
+      properties:
+        status_code: {const: 409}
+        error:
+          type: string
+          enum:
+            - idempotency_conflict
+            - sequence_conflict
+            - out_of_order
+            - prior_event_incomplete
+            - lease_lost
+            - event_not_retryable
+            - memory_embedding_backfill_required
+            - legacy_result_incompatible
+    RetryableResponse:
+      type: object
+      additionalProperties: false
+      required: [status_code, error, retryable, run_id]
+      properties:
+        status_code: {const: 503}
+        error:
+          type: string
+          enum:
+            - provider_timeout
+            - provider_rate_limit
+            - provider_server_error
+            - provider_network_error
+            - provider_http_response_unparseable
+            - model_output_unparseable_after_repair
+            - provider_operator_action_required
+            - sqlite_busy
+            - sqlite_io_error
+        retryable: {const: true}
+        run_id: {type: string}
+    ErrorResponse:
+      type: object
+      additionalProperties: false
+      required: [status_code, error]
+      properties:
+        status_code: {const: 400}
+        error:
+          type: string
+          enum:
+            - invalid_json
+            - invalid_request
+            - invalid_timestamp

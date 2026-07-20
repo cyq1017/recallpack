@@ -1,0 +1,51 @@
+{
+  "positioning": "RecallPack micro-suite is a hackathon evidence suite, not a broad benchmark.",
+  "cases": [
+    {"id": "noop_01", "gold_operation": "no_op", "predicted_operation": "no_op", "tags": ["assistant_vs_user_authority"]},
+    {"id": "noop_02", "gold_operation": "no_op", "predicted_operation": "no_op", "tags": ["assistant_vs_user_authority"]},
+    {"id": "noop_03", "gold_operation": "no_op", "predicted_operation": "no_op", "tags": ["non_memory_event"]},
+    {"id": "noop_04", "gold_operation": "no_op", "predicted_operation": "no_op", "tags": ["invalid_component"]},
+    {"id": "noop_05", "gold_operation": "no_op", "predicted_operation": "no_op", "tags": ["cross_scope_override"]},
+    {"id": "noop_06", "gold_operation": "no_op", "predicted_operation": "no_op", "tags": ["forbidden_lesson_supersession"]},
+    {"id": "noop_07", "gold_operation": "no_op", "predicted_operation": "no_op", "tags": ["irrelevant_tool_log"]},
+    {"id": "noop_08", "gold_operation": "no_op", "predicted_operation": "no_op", "tags": ["terminal_semantic_rejection"]},
+
+    {"id": "dup_01", "gold_operation": "duplicate", "predicted_operation": "duplicate", "tags": ["semantic_duplicate"]},
+    {"id": "dup_02", "gold_operation": "duplicate", "predicted_operation": "duplicate", "tags": ["semantic_duplicate"]},
+    {"id": "dup_03", "gold_operation": "duplicate", "predicted_operation": "duplicate", "tags": ["semantic_duplicate"]},
+    {"id": "dup_04", "gold_operation": "duplicate", "predicted_operation": "duplicate", "tags": ["semantic_duplicate"]},
+
+    {"id": "write_01", "gold_operation": "write_independent", "predicted_operation": "write_independent", "gold_memory_type": "preference", "predicted_memory_type": "preference", "tags": ["project_scope_preference"]},
+    {"id": "super_04", "gold_operation": "write_superseding", "predicted_operation": "write_superseding", "gold_memory_type": "preference", "predicted_memory_type": "preference", "gold_edge": ["write_01", "super_04"], "predicted_edge": ["write_01", "super_04"]},
+    {"id": "write_02", "gold_operation": "write_independent", "predicted_operation": "write_independent", "gold_memory_type": "preference", "predicted_memory_type": "preference", "tags": ["project_scope_preference"]},
+    {"id": "super_05", "gold_operation": "write_superseding", "predicted_operation": "write_superseding", "gold_memory_type": "preference", "predicted_memory_type": "preference", "gold_edge": ["write_02", "super_05"], "predicted_edge": ["write_02", "super_05"]},
+    {"id": "write_03", "gold_operation": "write_independent", "predicted_operation": "write_independent", "gold_memory_type": "preference", "predicted_memory_type": "preference", "tags": ["project_scope_preference"]},
+    {"id": "super_06", "gold_operation": "write_superseding", "predicted_operation": "write_superseding", "gold_memory_type": "preference", "predicted_memory_type": "preference", "gold_edge": ["write_03", "super_06"], "predicted_edge": ["write_03", "super_06"]},
+    {"id": "write_04", "gold_operation": "write_independent", "predicted_operation": "write_independent", "gold_memory_type": "decision", "predicted_memory_type": "decision", "tags": ["component_collision"]},
+    {"id": "super_01", "gold_operation": "write_superseding", "predicted_operation": "write_superseding", "gold_memory_type": "decision", "predicted_memory_type": "decision", "gold_edge": ["write_04", "super_01"], "predicted_edge": ["write_04", "super_01"]},
+    {"id": "write_05", "gold_operation": "write_independent", "predicted_operation": "write_independent", "gold_memory_type": "decision", "predicted_memory_type": "decision", "tags": ["component_collision"]},
+    {"id": "super_02", "gold_operation": "write_superseding", "predicted_operation": "write_superseding", "gold_memory_type": "decision", "predicted_memory_type": "decision", "gold_edge": ["write_05", "super_02"], "predicted_edge": ["write_05", "super_02"]},
+    {"id": "write_06", "gold_operation": "write_independent", "predicted_operation": "write_independent", "gold_memory_type": "decision", "predicted_memory_type": "decision", "tags": ["component_collision"]},
+    {"id": "super_03", "gold_operation": "write_superseding", "predicted_operation": "write_superseding", "gold_memory_type": "decision", "predicted_memory_type": "decision", "gold_edge": ["write_06", "super_03"], "predicted_edge": ["write_06", "super_03"]},
+    {"id": "write_07", "gold_operation": "write_independent", "predicted_operation": "write_independent", "gold_memory_type": "decision", "predicted_memory_type": "decision", "tags": ["decision"]},
+    {"id": "super_08", "gold_operation": "write_superseding", "predicted_operation": "write_superseding", "gold_memory_type": "decision", "predicted_memory_type": "decision", "gold_edge": ["write_07", "super_08"], "predicted_edge": ["write_07", "super_08"]},
+    {"id": "write_08", "gold_operation": "write_independent", "predicted_operation": "write_independent", "gold_memory_type": "decision", "predicted_memory_type": "decision", "tags": ["decision"]},
+    {"id": "super_07", "gold_operation": "write_superseding", "predicted_operation": "write_superseding", "gold_memory_type": "decision", "predicted_memory_type": "decision", "gold_edge": ["write_08", "super_07"], "predicted_edge": ["write_08", "super_07"]},
+    {"id": "write_09", "gold_operation": "write_independent", "predicted_operation": "write_independent", "gold_memory_type": "decision", "predicted_memory_type": "decision", "tags": ["decision"]},
+    {"id": "super_09", "gold_operation": "write_superseding", "predicted_operation": "write_superseding", "gold_memory_type": "decision", "predicted_memory_type": "decision", "gold_edge": ["write_09", "super_09"], "predicted_edge": ["write_09", "super_09"]},
+    {"id": "write_10", "gold_operation": "write_independent", "predicted_operation": "write_independent", "gold_memory_type": "decision", "predicted_memory_type": "decision", "tags": ["decision"]},
+    {"id": "super_10", "gold_operation": "write_superseding", "predicted_operation": "write_superseding", "gold_memory_type": "decision", "predicted_memory_type": "decision", "gold_edge": ["write_10", "super_10"], "predicted_edge": ["write_10", "super_10"]}
+  ],
+  "recall_goals": [
+    {"id": "goal_retry", "required_sources": ["super_01"], "selected_sources": ["super_01"]},
+    {"id": "goal_auth", "required_sources": ["super_02"], "selected_sources": ["super_02"]},
+    {"id": "goal_cache", "required_sources": ["super_03"], "selected_sources": ["super_03"]},
+    {"id": "goal_dependency", "required_sources": ["super_04"], "selected_sources": ["super_04"]},
+    {"id": "goal_config", "required_sources": ["super_05"], "selected_sources": ["super_05"]},
+    {"id": "goal_lessons", "required_sources": ["super_08"], "selected_sources": ["super_08"]},
+    {"id": "goal_policy", "required_sources": ["super_06"], "selected_sources": ["super_06"]},
+    {"id": "goal_retry_2", "required_sources": ["super_10"], "selected_sources": ["super_10"]}
+  ],
+  "stale_selected_items": 0,
+  "memory_segment_tokens": 384
+}

@@ -1,0 +1,995 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://recallpack.local/schemas/v4/review-seed.schema.json",
+  "title": "RecallPack V4.1 Review Seed Protocol",
+  "$comment": "Normative T067 shape contract. T068 integrates these definitions and the disjoint 4.0/4.1 dispatcher into evaluation.schema.json; semantic validation enforces derived sets, projection, canonical bytes, custody, and unique registration.",
+  "oneOf": [
+    {"$ref": "#/$defs/evaluationReviewSeed"},
+    {"$ref": "#/$defs/externalReviewAttestation"},
+    {"$ref": "#/$defs/executionManifest41"},
+    {"$ref": "#/$defs/requiredMemoryLabelLedger41"},
+    {"$ref": "#/$defs/leakageReview41"},
+    {"$ref": "#/$defs/modelVisibleSnapshot41"},
+    {"$ref": "#/$defs/sourceProvenance41"},
+    {"$ref": "#/$defs/fixtureBundle41"},
+    {"$ref": "#/$defs/hiddenTestBundle41"},
+    {"$ref": "#/$defs/seedReceipt41"},
+    {"$ref": "#/$defs/manifestRegistrationReceipt41"}
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?!0000)[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]Z$"
+    },
+    "artifactId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]+$"
+    },
+    "scenarioSlot": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*:)(?!.*\\\\).+$"
+    },
+    "seedRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!protocol(?:/|$))(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*:)(?!.*\\\\).+$"
+    },
+    "codeHashes41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtime_tree_sha256",
+        "evaluator_tree_sha256",
+        "evaluation_schema_sha256",
+        "dependency_lock_sha256"
+      ],
+      "properties": {
+        "runtime_tree_sha256": {"$ref": "#/$defs/sha256"},
+        "evaluator_tree_sha256": {"$ref": "#/$defs/sha256"},
+        "evaluation_schema_sha256": {"$ref": "#/$defs/sha256"},
+        "dependency_lock_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "comparisonContract41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "budget_tokens",
+        "tokenizer",
+        "patch_provider_contract_artifact_id",
+        "prompt_template_artifact_id",
+        "runner_contract_artifact_id",
+        "writable_paths",
+        "hidden_test_visibility",
+        "budget_scope",
+        "variant_input_policy",
+        "variant_comparability",
+        "variant_provider_role_contract"
+      ],
+      "properties": {
+        "budget_tokens": {"$ref": "evaluation.schema.json#/$defs/comparisonContract/properties/budget_tokens"},
+        "tokenizer": {"$ref": "evaluation.schema.json#/$defs/comparisonContract/properties/tokenizer"},
+        "patch_provider_contract_artifact_id": {"$ref": "evaluation.schema.json#/$defs/comparisonContract/properties/patch_provider_contract_artifact_id"},
+        "prompt_template_artifact_id": {"$ref": "evaluation.schema.json#/$defs/comparisonContract/properties/prompt_template_artifact_id"},
+        "runner_contract_artifact_id": {"$ref": "evaluation.schema.json#/$defs/comparisonContract/properties/runner_contract_artifact_id"},
+        "writable_paths": {"$ref": "evaluation.schema.json#/$defs/comparisonContract/properties/writable_paths"},
+        "hidden_test_visibility": {"$ref": "evaluation.schema.json#/$defs/comparisonContract/properties/hidden_test_visibility"},
+        "budget_scope": {"$ref": "evaluation.schema.json#/$defs/comparisonContract/properties/budget_scope"},
+        "variant_input_policy": {"$ref": "evaluation.schema.json#/$defs/comparisonContract/properties/variant_input_policy"},
+        "variant_comparability": {"$ref": "evaluation.schema.json#/$defs/comparisonContract/properties/variant_comparability"},
+        "variant_provider_role_contract": {"$ref": "evaluation.schema.json#/$defs/comparisonContract/properties/variant_provider_role_contract"}
+      }
+    },
+    "sourceBackedScenarioPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_slot",
+        "evidence_class",
+        "fixture_artifact_id",
+        "fixture_sha256",
+        "source_ledger_artifact_id",
+        "source_ledger_sha256",
+        "repository_snapshot_artifact_id",
+        "repository_snapshot_sha256",
+        "model_visible_snapshot_artifact_id",
+        "model_visible_snapshot_sha256",
+        "hidden_test_hash_artifact_id",
+        "hidden_test_content_sha256",
+        "provenance_artifact_id",
+        "provenance_sha256"
+      ],
+      "properties": {
+        "scenario_slot": {"enum": ["projectodyssey", "deepagents", "graphiti"]},
+        "evidence_class": {"const": "source_backed_synthetic"},
+        "fixture_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "fixture_sha256": {"$ref": "#/$defs/sha256"},
+        "source_ledger_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "source_ledger_sha256": {"$ref": "#/$defs/sha256"},
+        "repository_snapshot_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "repository_snapshot_sha256": {"$ref": "#/$defs/sha256"},
+        "model_visible_snapshot_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "model_visible_snapshot_sha256": {"$ref": "#/$defs/sha256"},
+        "hidden_test_hash_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "hidden_test_content_sha256": {"$ref": "#/$defs/sha256"},
+        "provenance_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "provenance_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "blindHoldoutScenarioPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scenario_slot", "evidence_class"],
+      "properties": {
+        "scenario_slot": {"type": "string", "pattern": "^blind_[A-Za-z0-9._-]{1,57}$"},
+        "evidence_class": {"const": "blind_holdout"}
+      }
+    },
+    "scenarioPlanItem": {
+      "oneOf": [
+        {"$ref": "#/$defs/sourceBackedScenarioPlan"},
+        {"$ref": "#/$defs/blindHoldoutScenarioPlan"}
+      ]
+    },
+    "externalKind": {
+      "enum": [
+        "required_memory_label_ledger",
+        "relation_label_ledger",
+        "leakage_review",
+        "fixture",
+        "source_ledger",
+        "model_visible_snapshot",
+        "hidden_test_bundle"
+      ]
+    },
+    "externalArtifactSlot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "scenario_slot",
+        "kind",
+        "canonicalization",
+        "reveal_phase",
+        "custody_state"
+      ],
+      "properties": {
+        "artifact_id": {"$ref": "#/$defs/artifactId"},
+        "scenario_slot": {"$ref": "#/$defs/scenarioSlot"},
+        "kind": {"$ref": "#/$defs/externalKind"},
+        "canonicalization": {"const": "rfc8785_json"},
+        "reveal_phase": {
+          "enum": [
+            "pre_run_eligibility_check",
+            "before_scenario_execution",
+            "after_model_output_fixed",
+            "post_outputs_fixed"
+          ]
+        },
+        "custody_state": {"const": "sealed_external"}
+      }
+    },
+    "seedFrozenArtifactRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "origin",
+        "relative_path",
+        "sha256",
+        "bytes",
+        "sanitized",
+        "content_policy"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "fixture",
+            "hidden_test_hash",
+            "source_provenance",
+            "source_ledger",
+            "repository_snapshot",
+            "patch_provider_contract",
+            "model_visible_snapshot",
+            "prompt_template",
+            "runner_contract",
+            "dockerfile",
+            "evaluator_runner",
+            "image_build_record"
+          ]
+        },
+        "origin": {"const": "seed_frozen"},
+        "relative_path": {"$ref": "#/$defs/seedRelativePath"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer", "minimum": 0},
+        "sanitized": {"const": true},
+        "content_policy": {"const": "sanitized_bounded"}
+      }
+    },
+    "seedFrozenCatalog": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^(?!(?:evaluation_review_seed|external_review_attestation)$)(?!external__)[A-Za-z0-9._-]+$"
+      },
+      "additionalProperties": {"$ref": "#/$defs/seedFrozenArtifactRecord"}
+    },
+    "evaluationReviewSeed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "review_seed_version",
+        "semantic_rules_version",
+        "created_at",
+        "target_rung",
+        "code_hashes",
+        "scenario_plan",
+        "variants",
+        "provider_settings",
+        "comparison_contract",
+        "evaluator_contract",
+        "technical_failure_codes",
+        "execution_order",
+        "claim_declarations",
+        "evaluator_image_digest",
+        "frozen_input_artifact_catalog",
+        "external_artifact_slots"
+      ],
+      "properties": {
+        "record_type": {"const": "evaluation_review_seed"},
+        "review_seed_version": {"const": "review-seed/4.1"},
+        "semantic_rules_version": {"const": "4.1"},
+        "created_at": {"$ref": "#/$defs/timestamp"},
+        "target_rung": {"enum": ["Full", "R1", "R2"]},
+        "code_hashes": {"$ref": "#/$defs/codeHashes41"},
+        "scenario_plan": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {"$ref": "#/$defs/scenarioPlanItem"}
+        },
+        "variants": {
+          "type": "array",
+          "prefixItems": [
+            {"const": "raw_full_history"},
+            {"const": "semantic_rerank"},
+            {"const": "recency_aware"},
+            {"const": "recall_time_resolver"},
+            {"const": "recallpack"}
+          ],
+          "items": false
+        },
+        "provider_settings": {"$ref": "evaluation.schema.json#/$defs/providerSettings"},
+        "comparison_contract": {"$ref": "#/$defs/comparisonContract41"},
+        "evaluator_contract": {"$ref": "evaluation.schema.json#/$defs/evaluatorContract"},
+        "technical_failure_codes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "evaluation.schema.json#/$defs/technicalFailureCode"}
+        },
+        "execution_order": {
+          "type": "array",
+          "minItems": 30,
+          "items": {"$ref": "evaluation.schema.json#/$defs/executionSlot"}
+        },
+        "claim_declarations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "evaluation.schema.json#/$defs/claimDeclaration"}
+        },
+        "evaluator_image_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "frozen_input_artifact_catalog": {"$ref": "#/$defs/seedFrozenCatalog"},
+        "external_artifact_slots": {
+          "type": "array",
+          "minItems": 6,
+          "items": {"$ref": "#/$defs/externalArtifactSlot"}
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"target_rung": {"const": "Full"}}},
+          "then": {
+            "properties": {
+              "scenario_plan": {
+                "minItems": 4,
+                "maxItems": 4,
+                "prefixItems": [
+                  {"allOf": [{"$ref": "#/$defs/sourceBackedScenarioPlan"}, {"properties": {"scenario_slot": {"const": "projectodyssey"}}}]},
+                  {"allOf": [{"$ref": "#/$defs/sourceBackedScenarioPlan"}, {"properties": {"scenario_slot": {"const": "deepagents"}}}]},
+                  {"allOf": [{"$ref": "#/$defs/sourceBackedScenarioPlan"}, {"properties": {"scenario_slot": {"const": "graphiti"}}}]},
+                  {"$ref": "#/$defs/blindHoldoutScenarioPlan"}
+                ],
+                "items": false
+              },
+              "external_artifact_slots": {"minItems": 16, "maxItems": 16},
+              "execution_order": {"minItems": 60, "maxItems": 60}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"target_rung": {"const": "R1"}}},
+          "then": {
+            "properties": {
+              "scenario_plan": {
+                "minItems": 3,
+                "maxItems": 3,
+                "prefixItems": [
+                  {"allOf": [{"$ref": "#/$defs/sourceBackedScenarioPlan"}, {"properties": {"scenario_slot": {"const": "projectodyssey"}}}]},
+                  {"allOf": [{"$ref": "#/$defs/sourceBackedScenarioPlan"}, {"properties": {"scenario_slot": {"const": "deepagents"}}}]},
+                  {"$ref": "#/$defs/blindHoldoutScenarioPlan"}
+                ],
+                "items": false
+              },
+              "external_artifact_slots": {"minItems": 13, "maxItems": 13},
+              "execution_order": {"minItems": 45, "maxItems": 45}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"target_rung": {"const": "R2"}}},
+          "then": {
+            "properties": {
+              "scenario_plan": {
+                "minItems": 2,
+                "maxItems": 2,
+                "prefixItems": [
+                  {"$ref": "#/$defs/sourceBackedScenarioPlan"},
+                  {"$ref": "#/$defs/sourceBackedScenarioPlan"}
+                ],
+                "items": false
+              },
+              "external_artifact_slots": {"minItems": 6, "maxItems": 6},
+              "execution_order": {"minItems": 30, "maxItems": 30}
+            }
+          }
+        }
+      ]
+    },
+    "externalArtifactAttestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "scenario_slot",
+        "kind",
+        "content_sha256",
+        "canonicalization",
+        "byte_length",
+        "reveal_phase"
+      ],
+      "properties": {
+        "artifact_id": {"$ref": "#/$defs/artifactId"},
+        "scenario_slot": {"$ref": "#/$defs/scenarioSlot"},
+        "kind": {"$ref": "#/$defs/externalKind"},
+        "content_sha256": {"$ref": "#/$defs/sha256"},
+        "canonicalization": {"const": "rfc8785_json"},
+        "byte_length": {"type": "integer", "minimum": 1},
+        "reveal_phase": {
+          "enum": [
+            "pre_run_eligibility_check",
+            "before_scenario_execution",
+            "after_model_output_fixed",
+            "post_outputs_fixed"
+          ]
+        }
+      }
+    },
+    "authorshipScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scenario_slot", "kind"],
+      "properties": {
+        "scenario_slot": {"$ref": "#/$defs/scenarioSlot"},
+        "kind": {"$ref": "#/$defs/externalKind"}
+      }
+    },
+    "externalReviewAttestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "attestation_version",
+        "review_seed_sha256",
+        "seed_receipt_id",
+        "seed_receipt_sha256",
+        "reviewer_id",
+        "reviewer_role",
+        "reviewed_at",
+        "external_artifacts",
+        "authorship_scopes",
+        "no_variant_output_access_before_authorship",
+        "external_custody_until_reveal"
+      ],
+      "properties": {
+        "record_type": {"const": "external_review_attestation"},
+        "attestation_version": {"const": "review-attestation/4.1"},
+        "review_seed_sha256": {"$ref": "#/$defs/sha256"},
+        "seed_receipt_id": {"type": "string", "pattern": "^seed_receipt_[A-Za-z0-9._-]+$"},
+        "seed_receipt_sha256": {"$ref": "#/$defs/sha256"},
+        "reviewer_id": {"type": "string", "pattern": "^reviewer_[A-Za-z0-9._-]+$"},
+        "reviewer_role": {"const": "external-reviewer"},
+        "reviewed_at": {"$ref": "#/$defs/timestamp"},
+        "external_artifacts": {
+          "type": "array",
+          "minItems": 6,
+          "items": {"$ref": "#/$defs/externalArtifactAttestation"}
+        },
+        "authorship_scopes": {
+          "type": "array",
+          "minItems": 6,
+          "items": {"$ref": "#/$defs/authorshipScope"}
+        },
+        "no_variant_output_access_before_authorship": {"const": true},
+        "external_custody_until_reveal": {"const": true}
+      }
+    },
+    "requiredMemoryLabelLedger41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_type", "scenario_slot", "source_ledger_sha256", "required_source_refs"],
+      "properties": {
+        "record_type": {"const": "required_memory_label_ledger"},
+        "scenario_slot": {"$ref": "#/$defs/scenarioSlot"},
+        "source_ledger_sha256": {"$ref": "#/$defs/sha256"},
+        "required_source_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "evaluation.schema.json#/$defs/sourceRef"}
+        }
+      }
+    },
+    "leakageReasonCode41": {
+      "enum": [
+        "no_copied_source_text",
+        "no_hidden_test_content_model_visible",
+        "no_gold_source_ids_model_visible",
+        "no_required_labels_model_visible",
+        "no_relation_labels_model_visible",
+        "other_review_rejection"
+      ]
+    },
+    "modelVisibleEvent41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_ref",
+        "observed_at",
+        "actor",
+        "kind",
+        "summary",
+        "model_visible",
+        "authored_summary"
+      ],
+      "properties": {
+        "source_ref": {"$ref": "evaluation.schema.json#/$defs/sourceRef"},
+        "observed_at": {"$ref": "#/$defs/timestamp"},
+        "actor": {"enum": ["user", "assistant", "system"]},
+        "kind": {"const": "message"},
+        "summary": {"type": "string", "minLength": 1, "maxLength": 4096},
+        "model_visible": {"const": true},
+        "authored_summary": {"const": true}
+      }
+    },
+    "modelVisibleSnapshot41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_type", "scenario_slot", "source_ledger_sha256", "events"],
+      "properties": {
+        "record_type": {"const": "model_visible_snapshot"},
+        "scenario_slot": {"$ref": "#/$defs/scenarioSlot"},
+        "source_ledger_sha256": {"$ref": "#/$defs/sha256"},
+        "events": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {"$ref": "#/$defs/modelVisibleEvent41"}
+        }
+      }
+    },
+    "sourceProvenance41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "scenario_slot",
+        "evidence_class",
+        "production_trace",
+        "copied_source_text",
+        "authored_summaries",
+        "repository_url",
+        "commit_refs",
+        "license_id",
+        "authored_summary_sha256"
+      ],
+      "properties": {
+        "record_type": {"const": "source_provenance"},
+        "scenario_slot": {"enum": ["projectodyssey", "deepagents", "graphiti"]},
+        "evidence_class": {"const": "source_backed_synthetic"},
+        "production_trace": {"const": false},
+        "copied_source_text": {"const": false},
+        "authored_summaries": {"const": true},
+        "repository_url": {
+          "enum": [
+            "https://github.com/HomericIntelligence/Odyssey",
+            "https://github.com/langchain-ai/deepagents",
+            "https://github.com/getzep/graphiti"
+          ]
+        },
+        "commit_refs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[a-f0-9]{40}$"}
+        },
+        "license_id": {"enum": ["BSD-3-Clause", "MIT", "Apache-2.0"]},
+        "authored_summary_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"scenario_slot": {"const": "projectodyssey"}}},
+          "then": {"properties": {"repository_url": {"const": "https://github.com/HomericIntelligence/Odyssey"}, "license_id": {"const": "BSD-3-Clause"}}}
+        },
+        {
+          "if": {"properties": {"scenario_slot": {"const": "deepagents"}}},
+          "then": {"properties": {"repository_url": {"const": "https://github.com/langchain-ai/deepagents"}, "license_id": {"const": "MIT"}}}
+        },
+        {
+          "if": {"properties": {"scenario_slot": {"const": "graphiti"}}},
+          "then": {"properties": {"repository_url": {"const": "https://github.com/getzep/graphiti"}, "license_id": {"const": "Apache-2.0"}}}
+        }
+      ]
+    },
+    "leakageReview41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "scenario_slot",
+        "fixture_sha256",
+        "source_ledger_sha256",
+        "model_visible_snapshot_sha256",
+        "prompt_template_sha256",
+        "relation_label_sha256",
+        "hidden_test_content_sha256",
+        "evaluator_image_digest",
+        "verdict",
+        "reason_codes"
+      ],
+      "properties": {
+        "record_type": {"const": "leakage_review"},
+        "scenario_slot": {"$ref": "#/$defs/scenarioSlot"},
+        "fixture_sha256": {"$ref": "#/$defs/sha256"},
+        "source_ledger_sha256": {"$ref": "#/$defs/sha256"},
+        "model_visible_snapshot_sha256": {"$ref": "#/$defs/sha256"},
+        "prompt_template_sha256": {"$ref": "#/$defs/sha256"},
+        "relation_label_sha256": {"$ref": "#/$defs/sha256"},
+        "hidden_test_content_sha256": {"$ref": "#/$defs/sha256"},
+        "evaluator_image_digest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "verdict": {"enum": ["pass", "reject"]},
+        "reason_codes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/leakageReasonCode41"}
+        }
+      }
+    },
+    "bundleFile41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes", "content_base64"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!\\.{1,2}(?:/|$))(?!.*\\/\\.{1,2}(?:\\/|$))[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*$"
+        },
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer", "minimum": 0, "maximum": 1048576},
+        "content_base64": {
+          "type": "string",
+          "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+        }
+      }
+    },
+    "deterministicFileBundle41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["record_type", "bundle_version", "scenario_slot", "purpose", "files"],
+      "properties": {
+        "record_type": {"const": "deterministic_file_bundle"},
+        "bundle_version": {"const": "deterministic-file-bundle/4.1"},
+        "scenario_slot": {"$ref": "#/$defs/scenarioSlot"},
+        "purpose": {"enum": ["fixture", "hidden_tests"]},
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {"$ref": "#/$defs/bundleFile41"}
+        }
+      }
+    },
+    "fixtureBundle41": {
+      "allOf": [
+        {"$ref": "#/$defs/deterministicFileBundle41"},
+        {"properties": {"purpose": {"const": "fixture"}}}
+      ]
+    },
+    "hiddenTestBundle41": {
+      "allOf": [
+        {"$ref": "#/$defs/deterministicFileBundle41"},
+        {"properties": {"purpose": {"const": "hidden_tests"}}}
+      ]
+    },
+    "seedReceipt41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "receipt_version",
+        "sequence",
+        "receipt_id",
+        "review_seed_sha256",
+        "received_at",
+        "receiver_role",
+        "assurance"
+      ],
+      "properties": {
+        "record_type": {"const": "seed_receipt"},
+        "receipt_version": {"const": "review-receipt/4.1"},
+        "sequence": {"const": 1},
+        "receipt_id": {"type": "string", "pattern": "^seed_receipt_[A-Za-z0-9._-]+$"},
+        "review_seed_sha256": {"$ref": "#/$defs/sha256"},
+        "received_at": {"$ref": "#/$defs/timestamp"},
+        "receiver_role": {"const": "external-reviewer"},
+        "assurance": {"const": "procedural"}
+      }
+    },
+    "manifestRegistrationReceipt41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "receipt_version",
+        "sequence",
+        "receipt_id",
+        "review_seed_sha256",
+        "review_attestation_sha256",
+        "execution_manifest_sha256",
+        "registered_at",
+        "registrar_role",
+        "assurance"
+      ],
+      "properties": {
+        "record_type": {"const": "manifest_registration_receipt"},
+        "receipt_version": {"const": "review-receipt/4.1"},
+        "sequence": {"const": 2},
+        "receipt_id": {"type": "string", "pattern": "^manifest_receipt_[A-Za-z0-9._-]+$"},
+        "review_seed_sha256": {"$ref": "#/$defs/sha256"},
+        "review_attestation_sha256": {"$ref": "#/$defs/sha256"},
+        "execution_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "registered_at": {"$ref": "#/$defs/timestamp"},
+        "registrar_role": {"enum": ["external-reviewer", "user-custodian"]},
+        "assurance": {"const": "procedural"}
+      }
+    },
+    "protocolArtifactRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "origin",
+        "relative_path",
+        "sha256",
+        "bytes",
+        "sanitized",
+        "content_policy"
+      ],
+      "properties": {
+        "kind": {"enum": ["evaluation_review_seed", "external_review_attestation"]},
+        "origin": {"const": "protocol_record"},
+        "relative_path": {"$ref": "#/$defs/relativePath"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sanitized": {"const": true},
+        "content_policy": {"const": "sanitized_bounded"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"kind": {"const": "evaluation_review_seed"}}},
+          "then": {"properties": {"relative_path": {"const": "protocol/evaluation-review-seed.json"}}}
+        },
+        {
+          "if": {"properties": {"kind": {"const": "external_review_attestation"}}},
+          "then": {"properties": {"relative_path": {"const": "protocol/external-review-attestation.json"}}}
+        }
+      ]
+    },
+    "externalHashReferenceRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "origin",
+        "relative_path",
+        "sha256",
+        "bytes",
+        "sanitized",
+        "content_policy",
+        "scenario_slot",
+        "external_kind",
+        "content_sha256",
+        "canonicalization",
+        "reveal_phase"
+      ],
+      "properties": {
+        "kind": {"const": "external_hash_reference"},
+        "origin": {"const": "attested_external_reference"},
+        "relative_path": {
+          "type": "string",
+          "pattern": "^protocol/external-hashes/[A-Za-z0-9][A-Za-z0-9._-]{0,63}/[a-z_]+\\.sha256$"
+        },
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"const": 64},
+        "sanitized": {"const": true},
+        "content_policy": {"const": "sanitized_bounded"},
+        "scenario_slot": {"$ref": "#/$defs/scenarioSlot"},
+        "external_kind": {"$ref": "#/$defs/externalKind"},
+        "content_sha256": {"$ref": "#/$defs/sha256"},
+        "canonicalization": {"const": "rfc8785_json"},
+        "reveal_phase": {
+          "enum": [
+            "pre_run_eligibility_check",
+            "before_scenario_execution",
+            "after_model_output_fixed",
+            "post_outputs_fixed"
+          ]
+        }
+      }
+    },
+    "inputArtifactCatalog41": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {"pattern": "^[A-Za-z0-9._-]+$"},
+      "additionalProperties": {
+        "oneOf": [
+          {"$ref": "#/$defs/seedFrozenArtifactRecord"},
+          {"$ref": "#/$defs/protocolArtifactRecord"},
+          {"$ref": "#/$defs/externalHashReferenceRecord"}
+        ]
+      }
+    },
+    "review41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewer_role",
+        "review_seed_artifact_id",
+        "review_seed_sha256",
+        "review_attestation_artifact_id",
+        "review_attestation_sha256",
+        "leakage_review_hashes"
+      ],
+      "properties": {
+        "reviewer_role": {"const": "external-reviewer"},
+        "review_seed_artifact_id": {"const": "evaluation_review_seed"},
+        "review_seed_sha256": {"$ref": "#/$defs/sha256"},
+        "review_attestation_artifact_id": {"const": "external_review_attestation"},
+        "review_attestation_sha256": {"$ref": "#/$defs/sha256"},
+        "leakage_review_hashes": {
+          "type": "object",
+          "minProperties": 2,
+          "propertyNames": {"$ref": "#/$defs/scenarioSlot"},
+          "additionalProperties": {"$ref": "#/$defs/sha256"}
+        }
+      }
+    },
+    "publicEvidenceScenario41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_slot",
+        "evidence_class",
+        "custody_state",
+        "fixture_artifact_id",
+        "source_ledger_artifact_id",
+        "repository_snapshot_artifact_id",
+        "model_visible_snapshot_artifact_id",
+        "hidden_test_hash_artifact_id",
+        "required_memory_label_hash_artifact_id",
+        "relation_label_hash_artifact_id",
+        "leakage_review_hash_artifact_id",
+        "provenance_artifact_id"
+      ],
+      "properties": {
+        "scenario_slot": {"enum": ["projectodyssey", "deepagents", "graphiti"]},
+        "evidence_class": {"const": "source_backed_synthetic"},
+        "custody_state": {"const": "externally_reviewed_hashes_only"},
+        "fixture_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "source_ledger_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "repository_snapshot_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "model_visible_snapshot_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "hidden_test_hash_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "required_memory_label_hash_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "relation_label_hash_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "leakage_review_hash_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "provenance_artifact_id": {"$ref": "#/$defs/artifactId"}
+      }
+    },
+    "blindEvidenceScenario41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_slot",
+        "evidence_class",
+        "custody_state",
+        "fixture_artifact_id",
+        "source_ledger_artifact_id",
+        "repository_snapshot_artifact_id",
+        "model_visible_snapshot_artifact_id",
+        "hidden_test_hash_artifact_id",
+        "required_memory_label_hash_artifact_id",
+        "relation_label_hash_artifact_id",
+        "leakage_review_hash_artifact_id",
+        "provenance_artifact_id"
+      ],
+      "properties": {
+        "scenario_slot": {"type": "string", "pattern": "^blind_[A-Za-z0-9._-]{1,57}$"},
+        "evidence_class": {"const": "blind_holdout"},
+        "custody_state": {"const": "sealed_external"},
+        "fixture_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "source_ledger_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "repository_snapshot_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "model_visible_snapshot_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "hidden_test_hash_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "required_memory_label_hash_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "relation_label_hash_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "leakage_review_hash_artifact_id": {"$ref": "#/$defs/artifactId"},
+        "provenance_artifact_id": {"type": "null"}
+      }
+    },
+    "evidenceScenario41": {
+      "oneOf": [
+        {"$ref": "#/$defs/publicEvidenceScenario41"},
+        {"$ref": "#/$defs/blindEvidenceScenario41"}
+      ]
+    },
+    "executionManifest41": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "manifest_version",
+        "created_at",
+        "descope_rung",
+        "semantic_rules_version",
+        "code_hashes",
+        "scenario_slots",
+        "evidence_scenarios",
+        "fixture_hashes",
+        "label_hashes",
+        "hidden_test_hashes",
+        "variants",
+        "provider_settings",
+        "comparison_contract",
+        "evaluator_contract",
+        "technical_failure_codes",
+        "execution_order",
+        "input_artifact_catalog",
+        "claim_declarations",
+        "review",
+        "evaluator_image_digest"
+      ],
+      "properties": {
+        "record_type": {"const": "execution_manifest"},
+        "manifest_version": {"const": "execution-manifest/4.1"},
+        "created_at": {"$ref": "#/$defs/timestamp"},
+        "descope_rung": {"enum": ["Full", "R1", "R2"]},
+        "semantic_rules_version": {"const": "4.1"},
+        "code_hashes": {"$ref": "#/$defs/codeHashes41"},
+        "scenario_slots": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/scenarioSlot"}
+        },
+        "evidence_scenarios": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {"$ref": "#/$defs/evidenceScenario41"}
+        },
+        "fixture_hashes": {"$ref": "evaluation.schema.json#/$defs/hashMap"},
+        "label_hashes": {"$ref": "evaluation.schema.json#/$defs/hashMap"},
+        "hidden_test_hashes": {"$ref": "evaluation.schema.json#/$defs/hashMap"},
+        "variants": {
+          "type": "array",
+          "prefixItems": [
+            {"const": "raw_full_history"},
+            {"const": "semantic_rerank"},
+            {"const": "recency_aware"},
+            {"const": "recall_time_resolver"},
+            {"const": "recallpack"}
+          ],
+          "items": false
+        },
+        "provider_settings": {"$ref": "evaluation.schema.json#/$defs/providerSettings"},
+        "comparison_contract": {"$ref": "#/$defs/comparisonContract41"},
+        "evaluator_contract": {"$ref": "evaluation.schema.json#/$defs/evaluatorContract"},
+        "technical_failure_codes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "evaluation.schema.json#/$defs/technicalFailureCode"}
+        },
+        "execution_order": {
+          "type": "array",
+          "minItems": 30,
+          "items": {"$ref": "evaluation.schema.json#/$defs/executionSlot"}
+        },
+        "input_artifact_catalog": {"$ref": "#/$defs/inputArtifactCatalog41"},
+        "claim_declarations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "evaluation.schema.json#/$defs/claimDeclaration"}
+        },
+        "review": {"$ref": "#/$defs/review41"},
+        "evaluator_image_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"descope_rung": {"const": "Full"}}},
+          "then": {
+            "properties": {
+              "scenario_slots": {"minItems": 4, "maxItems": 4},
+              "evidence_scenarios": {"minItems": 4, "maxItems": 4},
+              "execution_order": {"minItems": 60, "maxItems": 60}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"descope_rung": {"const": "R1"}}},
+          "then": {
+            "properties": {
+              "scenario_slots": {"minItems": 3, "maxItems": 3},
+              "evidence_scenarios": {"minItems": 3, "maxItems": 3},
+              "execution_order": {"minItems": 45, "maxItems": 45}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"descope_rung": {"const": "R2"}}},
+          "then": {
+            "properties": {
+              "scenario_slots": {"minItems": 2, "maxItems": 2},
+              "evidence_scenarios": {"minItems": 2, "maxItems": 2},
+              "execution_order": {"minItems": 30, "maxItems": 30}
+            }
+          }
+        }
+      ]
+    }
+  }
+}

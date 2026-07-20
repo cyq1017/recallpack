@@ -1,0 +1,52 @@
+{
+  "status": "additional_info_media_uploaded",
+  "recorded_at": "2026-07-05T05:19:02+08:00",
+  "devpost_section": "Additional info",
+  "final_submit_performed": false,
+  "uploads": [
+    {
+      "field": "Architecture Diagram",
+      "filename": "architecture-diagram.png",
+      "path": "docs/submission/media/architecture-diagram.png",
+      "upload_performed": true,
+      "privacy_checked": true,
+      "privacy_check_summary": "Visual check found no personal contact info, credentials, private local paths, or account console data."
+    },
+    {
+      "field": "Screenshot showing proof of Alibaba Cloud Deployment",
+      "filename": "alibaba-cloud-deployment-proof-redacted.png",
+      "path": "docs/submission/media/alibaba-cloud-deployment-proof-redacted.png",
+      "source_path": "docs/submission/media/alibaba-cloud-deployment-proof.png",
+      "upload_performed": true,
+      "privacy_checked": true,
+      "redacted": true,
+      "redacted_items": [
+        "public ECS IP address",
+        "GitHub account-like repository owner"
+      ],
+      "privacy_check_summary": "Uploaded redacted copy only; the original deployment proof PNG was not uploaded."
+    },
+    {
+      "field": "Presentation PPT",
+      "filename": "recallpack-judge-deck.pptx",
+      "path": "docs/submission/media/recallpack-judge-deck.pptx",
+      "upload_performed": false,
+      "privacy_checked": true,
+      "privacy_check_summary": "Rendered all six slides and scanned PPTX text/XML and metadata. No personal contact information, credentials, private local paths, raw API keys, public ECS endpoint, or repository owner identifier was found."
+    }
+  ],
+  "not_uploaded": [
+    "docs/submission/media/alibaba-cloud-deployment-proof.png",
+    "docs/submission/media/recallpack-judge-deck.pptx"
+  ],
+  "remaining_manual_items": [
+    "final presentation PPT upload or link",
+    "final video URL or upload",
+    "final Devpost submit approval",
+    "final media order confirmation"
+  ],
+  "notes": [
+    "Devpost was left on the finalization page after Save & continue.",
+    "Do not upload future media without a privacy/sensitive-info check first."
+  ]
+}

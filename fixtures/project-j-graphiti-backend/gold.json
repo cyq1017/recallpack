@@ -1,0 +1,13 @@
+{
+  "project_id": "project-j-graphiti-backend",
+  "component": "backend_policy",
+  "fixture_structure": "source_backed_graphiti_backend_deprecation",
+  "allowed_edit_paths": ["src/backend_policy.py", "pyproject.toml"],
+  "initial_dependency_set": [],
+  "hidden_test_kind": "backend_deprecation_policy",
+  "hidden_tests": [
+    "test_new_example_uses_maintained_backend",
+    "test_legacy_compatibility_remains_kuzu",
+    "test_backend_policy_no_new_dependencies"
+  ]
+}
